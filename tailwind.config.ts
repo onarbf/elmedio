@@ -2,10 +2,14 @@ import type { Config } from 'tailwindcss'
 import type { PluginAPI } from 'tailwindcss/types/config'
 export default {
   content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './components/**/*.{js,ts,jsx,tsx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/**/*.{js,ts,jsx,tsx}',
+    './src/**/*.{js,ts,jsx,tsx,mdx}', // Incluye todo dentro de "src"
+    './src/app/**/*.{js,ts,jsx,tsx}', // Específico para "app"
+    './src/actions/**/*.{js,ts}', // Específico para "actions"
+    './src/components/**/*.{js,ts,jsx,tsx}', // Específico para "components"
+    './src/constants/**/*.{js,ts}', // Específico para "constants"
+    './src/styles/**/*.{css,scss}', // Específico para "styles" (CSS/SCSS)
+    './src/types/**/*.{ts}', // Específico para "types"
+    './src/utils/**/*.{js,ts}', // Específico para "utils"
   ],
   darkMode: 'selector',
   theme: {
