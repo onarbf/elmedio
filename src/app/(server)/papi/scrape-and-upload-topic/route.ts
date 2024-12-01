@@ -1,9 +1,9 @@
 import scrapeAndCreateTopic from '@/app/(server)/jobs/scrapeAndCreateTopic'
 import { buildError } from '@/utils/errors/buildError'
 import errorResponse from '@/utils/errors/errorResponse'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
     const response = await scrapeAndCreateTopic()
 

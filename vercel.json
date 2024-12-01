@@ -1,0 +1,8 @@
+{
+  "crons": [
+    {
+      "path": "/papi/scrape-and-upload-topic",
+      "schedule": "*/10 * * * *"
+    }
+  ]
+}
