@@ -1,16 +1,6 @@
-import type { Config } from 'tailwindcss'
-import type { PluginAPI } from 'tailwindcss/types/config'
+/** @type {import('tailwindcss').Config} */
 export default {
-  content: [
-    './src/**/*.{js,ts,jsx,tsx,mdx}', // Incluye todo dentro de "src"
-    './src/app/**/*.{js,ts,jsx,tsx}', // Específico para "app"
-    './src/actions/**/*.{js,ts}', // Específico para "actions"
-    './src/Components/**/*.{js,ts,jsx,tsx}', // Específico para "components"
-    './src/constants/**/*.{js,ts}', // Específico para "constants"
-    './src/styles/**/*.{css,scss}', // Específico para "styles" (CSS/SCSS)
-    './src/types/**/*.ts', // Específico para "types"
-    './src/utils/**/*.{js,ts}', // Específico para "utils"
-  ],
+  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   darkMode: 'selector',
   theme: {
     screens: {
@@ -84,7 +74,7 @@ export default {
     },
   },
   plugins: [
-    function (api: PluginAPI) {
+    function (api) {
       const { addBase } = api
       addBase({
         '@media (min-width: 768px)': {
@@ -100,4 +90,4 @@ export default {
       })
     },
   ],
-} satisfies Config
+}
