@@ -1,0 +1,16 @@
+{
+  "Home": {
+    "Metadata": {
+      "title": "Home",
+      "description": "Descripción de la home"
+    },
+    "title": "Hola Mundo!"
+  },
+  "About": {
+    "Metadata": {
+      "title": "Página about",
+      "description": "Descripción about"
+    },
+    "title": "Hola about!!"
+  }
+}
