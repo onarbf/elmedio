@@ -8,7 +8,7 @@ export default {
     './src/components/**/*.{js,ts,jsx,tsx}', // Específico para "components"
     './src/constants/**/*.{js,ts}', // Específico para "constants"
     './src/styles/**/*.{css,scss}', // Específico para "styles" (CSS/SCSS)
-    './src/types/**/*.{ts}', // Específico para "types"
+    './src/types/**/*.ts', // Específico para "types"
     './src/utils/**/*.{js,ts}', // Específico para "utils"
   ],
   darkMode: 'selector',
