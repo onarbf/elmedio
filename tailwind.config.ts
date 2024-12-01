@@ -5,7 +5,7 @@ export default {
     './src/**/*.{js,ts,jsx,tsx,mdx}', // Incluye todo dentro de "src"
     './src/app/**/*.{js,ts,jsx,tsx}', // Específico para "app"
     './src/actions/**/*.{js,ts}', // Específico para "actions"
-    './src/components/**/*.{js,ts,jsx,tsx}', // Específico para "components"
+    './src/Components/**/*.{js,ts,jsx,tsx}', // Específico para "components"
     './src/constants/**/*.{js,ts}', // Específico para "constants"
     './src/styles/**/*.{css,scss}', // Específico para "styles" (CSS/SCSS)
     './src/types/**/*.ts', // Específico para "types"
