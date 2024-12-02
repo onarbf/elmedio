@@ -1,10 +1,10 @@
-"use client";
-import LanguageSelector from "@/components/cells/LanguageSelector";
-import ThemeSwitcher from "@/components/cells/ThemeSwitcher";
-import Wrapper from "@/components/cells/Wrapper";
+'use client'
+import LanguageSelector from '@/components/cells/LanguageSelector'
+import ThemeSwitcher from '@/components/cells/ThemeSwitcher'
+import Wrapper from '@/components/cells/Wrapper'
 
 export default function Footer() {
-  const date = new Date().getFullYear();
+  const date = new Date().getFullYear()
 
   return (
     <footer className="">
@@ -22,5 +22,5 @@ export default function Footer() {
         </div>
       </Wrapper>
     </footer>
-  );
+  )
 }

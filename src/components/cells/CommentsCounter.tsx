@@ -1,5 +1,5 @@
-import Text from "@/components/atoms/Text";
-import { MessageSquare } from "lucide-react";
+import Text from '@/components/atoms/Text'
+import { MessageSquare } from 'lucide-react'
 
 export default function CommentsCounter() {
   return (
@@ -7,5 +7,5 @@ export default function CommentsCounter() {
       <Text as="small">49</Text>
       <MessageSquare className="w-[1rem] -mt-[2px]" />
     </div>
-  );
+  )
 }

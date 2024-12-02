@@ -1,7 +1,7 @@
 import { scrapeTopics } from '@/app/(server)/tasks/scrapeTopics'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { createTopic } from '@/app/(server)/tasks/createTopic'
+import { createTopic } from '@/app/(server)/tasks/uploadTopic'
 import { buildResponse } from '@/utils/buildResponse'
 import errorResponse from '@/utils/errors/errorResponse'
 import { serverError } from '@/utils/errors/serverError'

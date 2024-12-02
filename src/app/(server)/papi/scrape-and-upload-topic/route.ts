@@ -1,5 +1,4 @@
 import scrapeAndCreateTopic from '@/app/(server)/jobs/scrapeAndCreateTopic'
-import { buildError } from '@/utils/errors/buildError'
 import errorResponse from '@/utils/errors/errorResponse'
 import { NextRequest, NextResponse } from 'next/server'
 

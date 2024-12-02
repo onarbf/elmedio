@@ -1,15 +1,17 @@
-export function buildResponse({
+import { ServerResponse } from '@/types'
+
+export function buildResponse<T>({
   data,
-  message = 'Operación exitosa',
+  message = 'Operation successful',
   status = 200,
 }: {
-  data: any
+  data: T
   message?: string
   status?: number
-}) {
+}): ServerResponse<T> {
   return {
-    status,
-    message,
     data,
+    message,
+    status,
   }
 }

@@ -2,10 +2,10 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { serverError } from '@/utils/errors/serverError'
 import { buildResponse } from '@/utils/buildResponse'
+import { FlexibleTopic } from '@/types'
 
-export async function createTopic(body: any) {
+export async function uploadTopic(topic: FlexibleTopic) {
   try {
-    const topic = body
     const payload = await getPayload({ config })
 
     const newTopic = await payload.create({

@@ -1,4 +1,5 @@
 import _ from '@/constants'
+import { Topic } from '@/payload-types'
 
 type TextStyles = keyof typeof _.styles.textStyles
 
@@ -25,4 +26,34 @@ export type WrapperProps = {
   as?: 'div' | 'section' | 'main'
   children: ReactElement
   className?: string
+}
+
+export interface ServerResponse<T = unknown> {
+  data: T
+  message?: string
+  status?: number
+}
+
+export type ServerError = {
+  name: 'UnknownError'
+  message: 'Error de desconocido'
+  details: any
+  status: 500
+  error: any
+}
+
+export type FlexiblePost = Pick<Post, 'title' | 'body' | 'author' | 'topic' | 'categories'> & {
+  id?: number
+  createdAt?: string
+  updatedAt?: string
+  thumbnail?: Post['thumbnail']
+  sources?: Post['sources']
+  publishedAt?: string
+}
+
+export type FlexibleTopic = Pick<Topic, 'title' | 'source' | 'topicStatus'> & {
+  id?: number
+  publishAt?: string
+  createdAt?: string
+  updatedAt?: string
 }

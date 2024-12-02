@@ -1,6 +1,7 @@
+import { ServerError } from '@/types'
 import { buildError } from '@/utils/errors/buildError'
 
-export function serverError(error: any) {
+export function serverError(error: any): ServerError {
   console.error('Error al procesar la solicitud:', error)
 
   if (!error.name || !error)

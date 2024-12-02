@@ -1,29 +1,29 @@
-import "@/styles/globals.css";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages, setRequestLocale } from "next-intl/server";
-import Navbar from "@/components/cells/Navbar";
-import Footer from "@/components/cells/Footer";
-import { notFound } from "next/navigation";
-import { routing } from "@/utils/i18n/routing";
-import { ReactElement } from "react";
+import '@/styles/globals.css'
+import { NextIntlClientProvider } from 'next-intl'
+import { getMessages, setRequestLocale } from 'next-intl/server'
+import Navbar from '@/components/cells/Navbar'
+import Footer from '@/components/cells/Footer'
+import { notFound } from 'next/navigation'
+import { routing } from '@/utils/i18n/routing'
+import { ReactElement } from 'react'
 
 export function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "de" }, { locale: "es" }];
+  return [{ locale: 'en' }, { locale: 'de' }, { locale: 'es' }]
 }
 export default async function LocaleLayout({
   children,
   params,
 }: {
-  children: ReactElement;
-  params: any;
+  children: ReactElement
+  params: any
 }) {
-  const { locale } = await params;
+  const { locale } = await params
   if (!routing.locales.includes(locale as any)) {
-    notFound();
+    notFound()
   }
 
-  setRequestLocale(locale);
-  const messages = await getMessages({ locale });
+  setRequestLocale(locale)
+  const messages = await getMessages({ locale })
 
   return (
     <html
@@ -38,5 +38,5 @@ export default async function LocaleLayout({
         </NextIntlClientProvider>
       </body>
     </html>
-  );
+  )
 }
