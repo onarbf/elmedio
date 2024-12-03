@@ -7,13 +7,13 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const prompt = 'Qué significa la expresión hay está el tio!'
+    const prompt = 'Qué significa el nombre Leire?'
     const { data } = await writePost({ prompt })
     console.log('data', data)
 
     const cookedPost = {
       body: data.content,
-      title: 'Just a test 2',
+      title: 'Just a test 3',
       author: 1,
       categories: 'news',
       topic: 8,
