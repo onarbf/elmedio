@@ -4,8 +4,9 @@ import PostCard from '@/components/cells/cards/PostCard'
 import CommentsCounter from '@/components/cells/CommentsCounter'
 import Wrapper from '@/components/cells/Wrapper'
 import { Post } from '@/payload-types'
+import { PaginatedDocs } from 'payload'
 
-export default function PageClient({ data }: { data: any }) {
+export default function PageClient({ posts }: { posts: PaginatedDocs<Post> }) {
   return (
     <Wrapper as="main" className="mt-2 aspect-video">
       <section className="flex justify-center ">
@@ -66,11 +67,9 @@ export default function PageClient({ data }: { data: any }) {
       {/* MAIN NEWS */}
       <section className="grid grid-cols-3 gap-x-8 gap-y-12 mt-8">
         {/* NEW CARD */}
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
+        {posts.docs.map((post, index) => (
+          <PostCard key={index} post={post} />
+        ))}
       </section>
 
       {/*  */}

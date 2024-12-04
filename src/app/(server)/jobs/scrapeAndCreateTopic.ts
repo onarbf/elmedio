@@ -1,10 +1,10 @@
 import { scrapeTopics } from '@/app/(server)/tasks/scrapeTopics'
 import { getPayload } from 'payload'
 import config from '@payload-config'
-import { createTopic } from '@/app/(server)/tasks/uploadTopic'
 import { buildResponse } from '@/utils/buildResponse'
 import errorResponse from '@/utils/errors/errorResponse'
 import { serverError } from '@/utils/errors/serverError'
+import { writeTopic } from '@/app/(server)/tasks/writeTopic'
 
 export default async function scrapeAndCreateTopic() {
   try {
@@ -22,7 +22,7 @@ export default async function scrapeAndCreateTopic() {
         },
       })
       if (topicExist.docs.length === 0) {
-        const response = await createTopic({
+        const response = await writeTopic({
           title: titles![i],
           source: 'efe.com',
           topicStatus: 'unwritten',

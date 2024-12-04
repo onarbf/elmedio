@@ -7,11 +7,10 @@ export const generateMetadata = createGenerateMetadata('Home.Metadata') as any
 export default async function Home() {
   /* const t = useTranslations("Home"); */
 
-  const { data } = await getPosts()
-  console.log(data)
+  const { data: posts } = await getPosts()
   return (
     <>
-      <PageClient data={data} />
+      <PageClient posts={posts} />
     </>
   )
 }
