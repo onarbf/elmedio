@@ -3,6 +3,7 @@ import getMessagesOnThread from '@/app/(server)/tasks/assitants/getMessagesOnThr
 import getPosts from '@/app/(server)/tasks/getPosts'
 import updatePost from '@/app/(server)/tasks/updatePost'
 import updateTopic from '@/app/(server)/tasks/updateTopic'
+import { Topic } from '@/payload-types'
 import errorResponse from '@/utils/errors/errorResponse'
 import titleToSlug from '@/utils/titleToSlug'
 import { NextResponse } from 'next/server'
@@ -28,7 +29,14 @@ export async function GET() {
       runId: unwrittenPost.docs[0].runId!,
     })
     const { data: messagesOnThread } = await getMessagesOnThread({ threadId: newRun.thread_id })
-    const postContent = JSON.parse(messagesOnThread.data[0].content[0].text.value as string)
+
+    // Validar si el contenido tiene la estructura esperada
+    const firstMessage = messagesOnThread.data[0]?.content[0]
+
+    if (!firstMessage || typeof firstMessage !== 'object' || !('text' in firstMessage)) {
+      throw new Error('Invalid message content format')
+    }
+    const postContent = JSON.parse(firstMessage.text.value as string)
 
     if (postContent) {
       const { data: newPost } = await updatePost({
@@ -44,7 +52,7 @@ export async function GET() {
       })
 
       const { data: updatedTopic } = await updateTopic({
-        topic: { ...newPost.topic, topicStatus: 'published' },
+        topic: { ...(newPost.topic as Topic), topicStatus: 'published' },
       })
 
       return NextResponse.json(updatedTopic)
