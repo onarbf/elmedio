@@ -1,11 +1,10 @@
 import createThreadRunMessage from '@/app/(server)/tasks/assitants/createThreadRunMessage'
 import getTopics from '@/app/(server)/tasks/getTopics'
 import getUsers from '@/app/(server)/tasks/getUsers'
+import updateTopic from '@/app/(server)/tasks/updateTopic'
 import uploadPost from '@/app/(server)/tasks/uploadPost'
-import writePost from '@/app/(server)/tasks/writePost'
 import errorResponse from '@/utils/errors/errorResponse'
 import { NextResponse } from 'next/server'
-import { threadId } from 'worker_threads'
 
 export async function GET() {
   try {
@@ -19,7 +18,9 @@ export async function GET() {
         },
       },
     })
+
     const { data: newRun } = await createThreadRunMessage({ prompt: unwrittenTopic.docs[0].title })
+    console.log(' newRun', newRun)
     const { data: newPost } = await uploadPost({
       post: {
         author: author.docs[0].id,
@@ -29,8 +30,10 @@ export async function GET() {
         postStatus: 'unwritten',
       },
     })
-    console.log(newPost)
-    return NextResponse.json({ newPost })
+    const { data: updatedTopic } = await updateTopic({
+      topic: { ...unwrittenTopic.docs[0], topicStatus: 'unpublished' },
+    })
+    return NextResponse.json({ updatedTopic })
   } catch (error) {
     const { body, options } = errorResponse(error)
     return NextResponse.json(body, options)

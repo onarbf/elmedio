@@ -13,24 +13,11 @@ export const Posts: CollectionConfig = {
     },
     { name: 'threadId', type: 'text', required: false },
     { name: 'runId', type: 'text', required: false },
-    // {
-    //   name: 'slug',
-    //   type: 'text',
-    //   unique: true,
-    //   hooks: {
-    //     beforeValidate: [
-    //       ({ data, value }) => {
-    //         if (!value && data?.title) {
-    //           return data.title
-    //             .toLowerCase()
-    //             .replace(/[^a-z0-9]+/g, '-')
-    //             .replace(/(^-|-$)/g, '')
-    //         }
-    //         return value
-    //       },
-    //     ],
-    //   },
-    // },
+    {
+      name: 'slug',
+      type: 'text',
+      unique: true,
+    },
     {
       name: 'body',
       type: 'textarea',
@@ -75,26 +62,7 @@ export const Posts: CollectionConfig = {
       type: 'upload',
       relationTo: 'media', // Assuming you have a Media collection
     },
-    {
-      name: 'postStatus',
-      type: 'select',
-      options: [
-        {
-          label: 'Unwritten',
-          value: 'unwritten',
-        },
-        {
-          label: 'Unpublished',
-          value: 'unpublished',
-        },
-        {
-          label: 'Published',
-          value: 'published',
-        },
-      ],
-      defaultValue: 'unwritten',
-      required: true,
-    },
+
     {
       name: 'sources',
       type: 'array',
@@ -118,6 +86,26 @@ export const Posts: CollectionConfig = {
     {
       name: 'publishedAt',
       type: 'date',
+    },
+    {
+      name: 'postStatus',
+      type: 'select',
+      options: [
+        {
+          label: 'Unwritten',
+          value: 'unwritten',
+        },
+        {
+          label: 'Unpublished',
+          value: 'unpublished',
+        },
+        {
+          label: 'Published',
+          value: 'published',
+        },
+      ],
+      defaultValue: 'unwritten',
+      required: true,
     },
   ],
 }

@@ -85,7 +85,7 @@ export default function PageClient({ post }: { post: Post }) {
               </div>
             </div>
           </div>
-          <div className="bg-red-300 h-[300px]">{post.body}</div>
+          <div className="bg-red-300 ">{post.body}</div>
         </div>
 
         <div className="col-span-4">

@@ -106,12 +106,12 @@ export interface Post {
   title?: string | null;
   threadId?: string | null;
   runId?: string | null;
+  slug?: string | null;
   body?: string | null;
   author: number | User;
   topic: number | Topic;
   categories?: ('news' | 'opinion' | 'feature') | null;
   thumbnail?: (number | null) | Media;
-  postStatus: 'unwritten' | 'unpublished' | 'published';
   sources?:
     | {
         source?: string | null;
@@ -120,6 +120,7 @@ export interface Post {
     | null;
   createdAt: string;
   publishedAt?: string | null;
+  postStatus: 'unwritten' | 'unpublished' | 'published';
   updatedAt: string;
 }
 /**
@@ -241,12 +242,12 @@ export interface PostsSelect<T extends boolean = true> {
   title?: T;
   threadId?: T;
   runId?: T;
+  slug?: T;
   body?: T;
   author?: T;
   topic?: T;
   categories?: T;
   thumbnail?: T;
-  postStatus?: T;
   sources?:
     | T
     | {
@@ -255,6 +256,7 @@ export interface PostsSelect<T extends boolean = true> {
       };
   createdAt?: T;
   publishedAt?: T;
+  postStatus?: T;
   updatedAt?: T;
 }
 /**

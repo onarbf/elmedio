@@ -7,7 +7,15 @@ export const generateMetadata = createGenerateMetadata('Home.Metadata') as any
 export default async function Home() {
   /* const t = useTranslations("Home"); */
 
-  const { data: posts } = await getPosts()
+  const { data: posts } = await getPosts({
+    options: {
+      where: {
+        postStatus: {
+          equals: 'published',
+        },
+      },
+    },
+  })
   return (
     <>
       <PageClient posts={posts} />
