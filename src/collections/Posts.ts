@@ -9,30 +9,32 @@ export const Posts: CollectionConfig = {
     {
       name: 'title',
       type: 'text',
-      required: true,
+      required: false,
     },
-    {
-      name: 'slug',
-      type: 'text',
-      unique: true,
-      hooks: {
-        beforeValidate: [
-          ({ data, value }) => {
-            if (!value && data?.title) {
-              return data.title
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, '-')
-                .replace(/(^-|-$)/g, '')
-            }
-            return value
-          },
-        ],
-      },
-    },
+    { name: 'threadId', type: 'text', required: false },
+    { name: 'runId', type: 'text', required: false },
+    // {
+    //   name: 'slug',
+    //   type: 'text',
+    //   unique: true,
+    //   hooks: {
+    //     beforeValidate: [
+    //       ({ data, value }) => {
+    //         if (!value && data?.title) {
+    //           return data.title
+    //             .toLowerCase()
+    //             .replace(/[^a-z0-9]+/g, '-')
+    //             .replace(/(^-|-$)/g, '')
+    //         }
+    //         return value
+    //       },
+    //     ],
+    //   },
+    // },
     {
       name: 'body',
       type: 'textarea',
-      required: true,
+      required: false,
       admin: {
         description: 'Supports Markdown text.',
       },
@@ -66,12 +68,32 @@ export const Posts: CollectionConfig = {
           value: 'feature',
         },
       ],
-      required: true,
+      required: false,
     },
     {
       name: 'thumbnail',
       type: 'upload',
       relationTo: 'media', // Assuming you have a Media collection
+    },
+    {
+      name: 'postStatus',
+      type: 'select',
+      options: [
+        {
+          label: 'Unwritten',
+          value: 'unwritten',
+        },
+        {
+          label: 'Unpublished',
+          value: 'unpublished',
+        },
+        {
+          label: 'Published',
+          value: 'published',
+        },
+      ],
+      defaultValue: 'unwritten',
+      required: true,
     },
     {
       name: 'sources',

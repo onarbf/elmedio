@@ -42,7 +42,12 @@ export type ServerError = {
   error: any
 }
 
-export type FlexiblePost = Pick<Post, 'title' | 'body' | 'author' | 'topic' | 'categories'> & {
+export type FlexiblePost = Pick<Post> & {
+  title: string
+  body: string
+  author: string
+  topic: string
+  categories: string
   id?: number
   createdAt?: string
   updatedAt?: string

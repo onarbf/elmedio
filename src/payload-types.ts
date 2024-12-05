@@ -103,13 +103,15 @@ export interface Media {
  */
 export interface Post {
   id: number;
-  title: string;
-  slug?: string | null;
-  body: string;
+  title?: string | null;
+  threadId?: string | null;
+  runId?: string | null;
+  body?: string | null;
   author: number | User;
   topic: number | Topic;
-  categories: 'news' | 'opinion' | 'feature';
+  categories?: ('news' | 'opinion' | 'feature') | null;
   thumbnail?: (number | null) | Media;
+  postStatus: 'unwritten' | 'unpublished' | 'published';
   sources?:
     | {
         source?: string | null;
@@ -237,12 +239,14 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
-  slug?: T;
+  threadId?: T;
+  runId?: T;
   body?: T;
   author?: T;
   topic?: T;
   categories?: T;
   thumbnail?: T;
+  postStatus?: T;
   sources?:
     | T
     | {
