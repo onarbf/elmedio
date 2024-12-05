@@ -3,6 +3,14 @@
     {
       "path": "/papi/scrape-and-upload-topic",
       "schedule": "*/10 * * * *"
+    },
+    {
+      "path": "/papi/cronjobs/create-thread-with-assistant-and-prompt",
+      "schedule": "*/30 * * * *"
+    },
+    {
+      "path": "/papi/cronjobs/check-run-and-publish",
+      "schedule": "5,35 * * * *"
     }
   ]
 }
