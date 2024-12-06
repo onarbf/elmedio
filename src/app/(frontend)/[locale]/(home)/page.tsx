@@ -3,7 +3,9 @@ import getPosts from '@/app/(server)/tasks/getPosts'
 import createGenerateMetadata from '@/utils/createGenerateMetadata'
 
 export const generateMetadata = createGenerateMetadata('Home.Metadata') as any
-export const revalidate = 36 * 60
+
+export const revalidate = 0 // Deshabilita el cacheo completamente
+
 export default async function Home() {
   /* const t = useTranslations("Home"); */
 
