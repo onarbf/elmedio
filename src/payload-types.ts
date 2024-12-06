@@ -85,6 +85,8 @@ export interface User {
 export interface Media {
   id: number;
   alt: string;
+  description?: string | null;
+  post?: (number | null) | Post;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -112,6 +114,7 @@ export interface Post {
   topic: number | Topic;
   categories?: ('news' | 'opinion' | 'feature') | null;
   thumbnail?: (number | null) | Media;
+  thumbnailUrl?: string | null;
   sources?:
     | {
         source?: string | null;
@@ -121,6 +124,7 @@ export interface Post {
   createdAt: string;
   publishedAt?: string | null;
   postStatus: 'unwritten' | 'unpublished' | 'published';
+  mediaStatus: 'Unused' | 'unstarted' | 'pending' | 'published';
   updatedAt: string;
 }
 /**
@@ -222,6 +226,8 @@ export interface UsersSelect<T extends boolean = true> {
  */
 export interface MediaSelect<T extends boolean = true> {
   alt?: T;
+  description?: T;
+  post?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
@@ -248,6 +254,7 @@ export interface PostsSelect<T extends boolean = true> {
   topic?: T;
   categories?: T;
   thumbnail?: T;
+  thumbnailUrl?: T;
   sources?:
     | T
     | {
@@ -257,6 +264,7 @@ export interface PostsSelect<T extends boolean = true> {
   createdAt?: T;
   publishedAt?: T;
   postStatus?: T;
+  mediaStatus?: T;
   updatedAt?: T;
 }
 /**

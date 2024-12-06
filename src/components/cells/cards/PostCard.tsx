@@ -3,12 +3,17 @@ import CommentsCounter from '@/components/cells/CommentsCounter'
 import { Post } from '@/payload-types'
 import A from '@/components/atoms/A'
 export default function PostCard({ post }: { post: Post }) {
+  const thumbnailUrl =
+    typeof post.thumbnail === 'object' && post.thumbnail !== null
+      ? post.thumbnail.url
+      : 'https://placehold.co/600x400'
+
   return (
     <div className="">
       {/* Image */}
       <div className="aspect-video">
         <A href={`/news/${post.slug}`}>
-          <img src="https://placehold.co/600x400" className="w-full h-full object-cover " />
+          <img src={thumbnailUrl!} className="w-full h-full object-cover " />
         </A>
       </div>
       {/* Title */}

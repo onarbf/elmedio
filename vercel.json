@@ -11,6 +11,10 @@
     {
       "path": "/papi/cronjobs/check-run-and-publish",
       "schedule": "5,35 * * * *"
+    },
+    {
+      "path": "/papi/cronjobs/generate-image",
+      "schedule": "6,36 * * * *"
     }
   ]
 }

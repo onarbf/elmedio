@@ -11,6 +11,20 @@ export const Media: CollectionConfig = {
       type: 'text',
       required: true,
     },
+    {
+      name: 'description',
+      type: 'text',
+      required: false,
+    },
+    {
+      name: 'post',
+      type: 'relationship',
+      relationTo: 'posts',
+      required: false,
+    },
   ],
-  upload: true,
+  upload: {
+    staticDir: 'path/to/uploads',
+    mimeTypes: ['image/*', 'video/*', 'application/pdf'],
+  },
 }

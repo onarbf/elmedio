@@ -62,7 +62,10 @@ export const Posts: CollectionConfig = {
       type: 'upload',
       relationTo: 'media', // Assuming you have a Media collection
     },
-
+    {
+      name: 'thumbnailUrl',
+      type: 'text',
+    },
     {
       name: 'sources',
       type: 'array',
@@ -106,6 +109,27 @@ export const Posts: CollectionConfig = {
       ],
       defaultValue: 'unwritten',
       required: true,
+    },
+    {
+      name: 'mediaStatus',
+      type: 'select',
+      required: true,
+      defaultValue: 'unstarted',
+      options: [
+        { label: 'unused', value: 'Unused' },
+        {
+          label: 'Unstarted',
+          value: 'unstarted',
+        },
+        {
+          label: 'Pending',
+          value: 'pending',
+        },
+        {
+          label: 'Published',
+          value: 'published',
+        },
+      ],
     },
   ],
 }

@@ -3,7 +3,7 @@ import { serverError } from '@/utils/errors/serverError'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { Post } from '@/payload-types'
-import { FlexiblePost, ServerError, ServerResponse } from '@/types'
+import { FlexiblePost, ServerResponse } from '@/types'
 
 export default async function uploadPost({
   post,
