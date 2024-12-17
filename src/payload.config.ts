@@ -53,7 +53,5 @@ export default buildConfig({
         endpoint: process.env.S3_ENDPOINT,
       },
     }),
-    payloadCloudPlugin(),
-    // storage-adapter-placeholder
   ],
 })
