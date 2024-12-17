@@ -80,9 +80,7 @@ async function processImageGeneration({ post }: { post: Post }) {
     // Subir la imagen a la colección `media`
     const newMedia = await payload.create({
       collection: 'media',
-      data: {
-        alt: post.title || 'Generated Image',
-      },
+      data: {},
       filePath: filePath, // Ruta del archivo guardado
     })
 

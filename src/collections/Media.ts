@@ -2,6 +2,13 @@ import type { CollectionConfig } from 'payload'
 
 export const Media: CollectionConfig = {
   slug: 'media',
-  fields: [],
+  fields: [
+    {
+      name: 'post',
+      type: 'relationship',
+      relationTo: 'posts',
+      required: false,
+    },
+  ],
   upload: true,
 }
