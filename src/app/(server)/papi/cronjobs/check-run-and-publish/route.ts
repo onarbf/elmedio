@@ -23,7 +23,7 @@ export async function GET() {
         },
       },
     })
-    console.log(unwrittenPost)
+
     const { data: newRun } = await checkRun({
       threadId: unwrittenPost.docs[0].threadId!,
       runId: unwrittenPost.docs[0].runId!,
@@ -36,6 +36,7 @@ export async function GET() {
     if (!firstMessage || typeof firstMessage !== 'object' || !('text' in firstMessage)) {
       throw new Error('Invalid message content format')
     }
+
     const postContent = JSON.parse(firstMessage.text.value as string)
 
     if (postContent) {
