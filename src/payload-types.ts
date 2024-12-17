@@ -87,6 +87,7 @@ export interface Media {
   alt: string;
   description?: string | null;
   post?: (number | null) | Post;
+  prefix?: string | null;
   updatedAt: string;
   createdAt: string;
   url?: string | null;
@@ -228,6 +229,7 @@ export interface MediaSelect<T extends boolean = true> {
   alt?: T;
   description?: T;
   post?: T;
+  prefix?: T;
   updatedAt?: T;
   createdAt?: T;
   url?: T;
