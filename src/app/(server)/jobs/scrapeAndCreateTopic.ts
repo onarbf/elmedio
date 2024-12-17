@@ -5,6 +5,7 @@ import { buildResponse } from '@/utils/buildResponse'
 import errorResponse from '@/utils/errors/errorResponse'
 import { serverError } from '@/utils/errors/serverError'
 import { writeTopic } from '@/app/(server)/tasks/writeTopic'
+import { uploadTopic } from '@/app/(server)/tasks/uploadTopic'
 
 export default async function scrapeAndCreateTopic() {
   try {
@@ -22,12 +23,11 @@ export default async function scrapeAndCreateTopic() {
         },
       })
       if (topicExist.docs.length === 0) {
-        const response = await writeTopic({
+        const response = await uploadTopic({
           title: titles![i],
           source: 'efe.com',
           topicStatus: 'unwritten',
         })
-
         return response
       }
     }

@@ -2,7 +2,7 @@ import PageClient from '@/app/(frontend)/[locale]/news/[slug]/page.client'
 import getPosts from '@/app/(server)/tasks/getPosts'
 
 export default async function Post({ params }: any) {
-  const { slug } = params
+  const { slug } = await params
   const { data: post } = await getPosts({
     options: {
       where: {
