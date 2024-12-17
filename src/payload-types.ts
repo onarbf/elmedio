@@ -84,9 +84,6 @@ export interface User {
  */
 export interface Media {
   id: number;
-  alt: string;
-  description?: string | null;
-  post?: (number | null) | Post;
   prefix?: string | null;
   updatedAt: string;
   createdAt: string;
@@ -226,9 +223,6 @@ export interface UsersSelect<T extends boolean = true> {
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
-  alt?: T;
-  description?: T;
-  post?: T;
   prefix?: T;
   updatedAt?: T;
   createdAt?: T;
