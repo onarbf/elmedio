@@ -42,7 +42,7 @@ export default buildConfig({
           prefix: 'media',
         },
       },
-      bucket: process.env.S3_BUCKET!,
+      bucket: 'supabase-payload',
       config: {
         forcePathStyle: true,
         credentials: {
