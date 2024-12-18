@@ -6,6 +6,7 @@ import errorResponse from '@/utils/errors/errorResponse'
 import { serverError } from '@/utils/errors/serverError'
 import { writeTopic } from '@/app/(server)/tasks/writeTopic'
 import { uploadTopic } from '@/app/(server)/tasks/uploadTopic'
+import { Topic } from '@/payload-types'
 
 export default async function scrapeAndCreateTopic() {
   try {
@@ -27,7 +28,7 @@ export default async function scrapeAndCreateTopic() {
           title: titles![i],
           source: 'efe.com',
           topicStatus: 'unwritten',
-        })
+        } as Topic)
         return response
       }
     }
