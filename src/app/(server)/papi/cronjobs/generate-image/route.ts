@@ -9,10 +9,7 @@ import fs from 'fs'
 
 import path from 'path'
 
-export const config = {
-  runtime: 'edge', // Configuración para Edge Function
-}
-export const maxDuration = 80 // This function can run for a maximum of 5 seconds
+export const maxDuration = 300
 
 export async function GET() {
   try {
@@ -29,18 +26,9 @@ export async function GET() {
       post: { ...post.docs[0], mediaStatus: 'unstarted' }, //CHANGE to pending
     })
 
-    setTimeout(async () => {
-      try {
-        console.log('FUNCIONA 1')
-        await processImageGeneration({ post: post.docs[0] })
+    await processImageGeneration({ post: post.docs[0] })
 
-        console.log('FUNCIONA 8')
-      } catch (error) {
-        console.error('Background task failed:', error)
-      }
-    }, 0)
-
-    return NextResponse.json({ message: 'Processing started', post: updatedPost })
+    return NextResponse.json({ message: 'Processing Ended', post: updatedPost })
   } catch (error) {
     const { body, options } = errorResponse(error)
     return NextResponse.json(body, options)
