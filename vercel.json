@@ -1,4 +1,9 @@
 {
+  "functions": {
+    "/papi/cronjobs/generate-image.ts": {
+      "maxDuration": 60
+    }
+  },
   "crons": [
     {
       "path": "/papi/scrape-and-upload-topic",
