@@ -8,6 +8,8 @@ import OpenAI from 'openai'
 import fs from 'fs'
 
 import path from 'path'
+import { experimental_generateImage as generateImage } from 'ai'
+import { openai } from '@ai-sdk/openai'
 
 export async function GET() {
   try {
@@ -24,16 +26,13 @@ export async function GET() {
       post: { ...post.docs[0], mediaStatus: 'unstarted' }, //CHANGE to pending
     })
 
-    setTimeout(async () => {
-      try {
-        console.log('FUNCIONA 1')
-        await processImageGeneration({ post: post.docs[0] })
+    const { image } = await generateImage({
+      model: openai.image('dall-e-3'),
+      prompt: 'Santa Claus driving a Cadillac',
+      size: '1024x1024',
+    })
 
-        console.log('FUNCIONA 8')
-      } catch (error) {
-        console.error('Background task failed:', error)
-      }
-    }, 0)
+    console.log('image', image)
 
     return NextResponse.json({ message: 'Processing started', post: updatedPost })
   } catch (error) {
