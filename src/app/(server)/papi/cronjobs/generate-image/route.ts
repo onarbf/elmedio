@@ -66,7 +66,7 @@ async function processImageGeneration({ post }: { post: Post }) {
     const imageBuffer = await imageResponse.arrayBuffer()
 
     // Configurar la ruta de almacenamiento
-    const uploadsDir = path.join(process.cwd(), 'public/uploads')
+    const uploadsDir = path.join(process.cwd(), 'temp/uploads')
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true }) // Crear el directorio si no existe
     }
