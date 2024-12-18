@@ -5,15 +5,12 @@ import errorResponse from '@/utils/errors/errorResponse'
 import getPayload from '@/utils/getPayload'
 import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
-import FormData from 'form-data'
 import fs from 'fs'
 
 import path from 'path'
 
 export async function GET() {
   try {
-    const payload = await getPayload()
-    const openai = new OpenAI()
     const { data: post } = await getPosts({
       options: {
         where: {
