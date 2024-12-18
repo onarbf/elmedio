@@ -89,7 +89,7 @@ export default function PageClient({ post }: { post: Post }) {
               </div>
             </div>
           </div> */}
-          <div class="news-body" dangerouslySetInnerHTML={{ __html: formattedBody }}></div>
+          <div className="news-body" dangerouslySetInnerHTML={{ __html: formattedBody }}></div>
         </div>
 
         <div className="col-span-4">
