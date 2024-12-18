@@ -20,12 +20,18 @@ export async function GET() {
         },
       },
     })
+
+    // Actualizar el estado del post a "pending"
     const { data: updatedPost } = await updatePost({
-      post: { ...post.docs[0], mediaStatus: 'unstarted' }, //CHANGE to pending
+      post: { ...post.docs[0], mediaStatus: 'pending' },
     })
 
-    await processImageGeneration({ post: post.docs[0] })
+    // Procesar la tarea en segundo plano
+    processImageGeneration({ post: post.docs[0] }).catch((error) => {
+      console.error('Background task failed:', error)
+    })
 
+    // Responder inmediatamente
     return NextResponse.json({ message: 'Processing started', post: updatedPost })
   } catch (error) {
     const { body, options } = errorResponse(error)
@@ -39,54 +45,46 @@ async function processImageGeneration({ post }: { post: Post }) {
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     })
-    console.log('FUNCIONA 3')
-    // Generar la imagen
+
+    console.log('Iniciando generación de imagen...')
     const response = await openai.images.generate({
       model: 'dall-e-3',
       prompt: `Make a nice image, without violence about ${post.title}`,
       n: 1,
       size: '1024x1024',
     })
-    console.log('Response from OpenAI:', response)
-    console.log('FUNCIONA 4')
-    const imageUrl = response.data[0].url
+    console.log('Imagen generada:', response)
 
-    // Descargar la imagen
+    const imageUrl = response.data[0].url
     const imageResponse = await fetch(imageUrl!)
     if (!imageResponse.ok) {
-      throw new Error(`Failed to fetch image: ${imageResponse.statusText}`)
+      throw new Error(`Error al descargar imagen: ${imageResponse.statusText}`)
     }
 
     const imageBuffer = await imageResponse.arrayBuffer()
-    console.log('FUNCIONA 5')
-    // Configurar la ruta de almacenamiento
     const uploadsDir = path.join(process.cwd(), 'temp/uploads')
     if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true }) // Crear el directorio si no existe
+      fs.mkdirSync(uploadsDir, { recursive: true })
     }
 
     const filePath = path.join(uploadsDir, `generated-${Date.now()}.png`)
     fs.writeFileSync(filePath, Buffer.from(imageBuffer))
-    console.log('FUNCIONA 6')
-    // Subir la imagen a la colección `media`
+
     const newMedia = await payload.create({
       collection: 'media',
       data: {},
-      filePath: filePath, // Ruta del archivo guardado
+      filePath: filePath,
     })
-    console.log('FUNCIONA 7')
-    // Actualizar el post con el estado correcto
+
     await updatePost({
       post: { ...post, mediaStatus: 'published', thumbnail: newMedia.id },
     })
 
-    console.log('Post updated successfully!')
+    console.log('Proceso completado con éxito')
   } catch (error) {
-    console.error('Error generating image:', error)
-
-    // Actualizar el estado del post en caso de error
+    console.error('Error en generación de imagen:', error)
     await updatePost({
-      post: { ...post, mediaStatus: 'unstarted' },
+      post: { ...post, mediaStatus: 'failed' },
     })
   }
 }
