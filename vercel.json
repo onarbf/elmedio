@@ -2,11 +2,11 @@
   "crons": [
     {
       "path": "/papi/scrape-and-upload-topic",
-      "schedule": "*/10 * * * *"
+      "schedule": "0,30 * * * *"
     },
     {
       "path": "/papi/cronjobs/create-thread-with-assistant-and-prompt",
-      "schedule": "*/30 * * * *"
+      "schedule": "2,32 * * * *"
     },
     {
       "path": "/papi/cronjobs/check-run-and-publish",
