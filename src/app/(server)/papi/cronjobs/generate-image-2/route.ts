@@ -36,7 +36,7 @@ export async function GET() {
     const imageBuffer = base64ToArrayBuffer(image.base64)
     console.log('image', image)
 
-    const uploadsDir = path.join(process.cwd(), 'tmp/uploads')
+    const uploadsDir = 'tmp/uploads'
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true }) // Crear el directorio si no existe
     }
