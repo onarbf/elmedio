@@ -9,9 +9,9 @@ import { Bookmark, Clock } from 'lucide-react'
 import markdownit from 'markdown-it'
 export default function PageClient({ post }: { post: Post }) {
   const md = markdownit()
-  const formattedBody = md.render(post.body!)
+  const formattedBody = md.render(post.body || '')
   const thumbnail = post.thumbnail as Media
-  const publishedDate = dateFormatter({ date: post.publishedAt! })
+  const publishedDate = dateFormatter({ date: post.publishedAt })
   return (
     <Wrapper as="main">
       <section className="mt-8">
@@ -36,7 +36,7 @@ export default function PageClient({ post }: { post: Post }) {
         {/* IMAGE */}
         <div className="mt-8">
           <img
-            src={thumbnail! ? thumbnail.url! : 'https://placehold.co/1200x400'}
+            src={thumbnail.url ? thumbnail.url! : 'https://placehold.co/1200x400'}
             className="aspect-video w-full h-full object-cover"
           />
         </div>

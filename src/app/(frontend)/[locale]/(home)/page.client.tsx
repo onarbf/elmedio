@@ -8,9 +8,7 @@ import { PaginatedDocs } from 'payload'
 
 export default function PageClient({ posts }: { posts: PaginatedDocs<Post> }) {
   const mainPost = posts.docs[0]
-  console.log('mainPost', posts.docs.length)
   const secondaryPosts = posts.docs.filter((post, index) => index !== 0)
-  console.log('secondaryPosts', secondaryPosts.length)
   return (
     <Wrapper as="main" className="mt-2 aspect-video">
       <section className="flex justify-center ">

@@ -6,13 +6,13 @@ import dateFormatter from '@/utils/dateFormatter/dateFormatter'
 
 export default function BigPostCard({ post }: { post: Post }) {
   const thumbnail = post.thumbnail as Media
-  const publishedDate = dateFormatter({ date: post.publishedAt! })
+  const publishedDate = dateFormatter({ date: post.publishedAt })
   return (
     <section className="mt-8">
       <div className="">
         <A href={`/news/${post.slug}`}>
           <img
-            src={thumbnail! ? thumbnail.url! : 'https://placehold.co/1200x400'}
+            src={thumbnail.url ? thumbnail.url : 'https://placehold.co/1200x400'}
             className="w-full h-full object-cover aspect-video"
           />
         </A>
