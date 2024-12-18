@@ -42,11 +42,11 @@ async function processImageGeneration({ post }: { post: Post }) {
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     })
-    console.log('FUNCIONA 3')
+    console.log('FUNCIONA 3', post.imagePrompt)
     // Generar la imagen
     const response = await openai.images.generate({
       model: 'dall-e-3',
-      prompt: `Make a nice image about ${post.imagePrompt}`,
+      prompt: `Make a nice image about ${post.imagePrompt}. Please, be careful with content policy and respect it. Don't do anything racist, sexual or violent.`,
       n: 1,
       size: '1024x1024',
     })
