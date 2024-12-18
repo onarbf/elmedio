@@ -43,3 +43,11 @@
   --primary-800: var(--blue-color-800);
   --primary-900: var(--blue-color-900);
 }
+
+.news-body h3 {
+  font-family: 'Times New Roman', 'Georgia', 'Cambria', 'Times New Roman', 'serif';
+  font-size: 2rem;
+}
+
+.news-body p {
+}

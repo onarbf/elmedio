@@ -11,6 +11,16 @@ export const Posts: CollectionConfig = {
       type: 'text',
       required: false,
     },
+    {
+      name: 'subtitle',
+      type: 'text',
+      required: false,
+    },
+    {
+      name: 'imagePrompt',
+      type: 'text',
+      required: false,
+    },
     { name: 'threadId', type: 'text', required: false },
     { name: 'runId', type: 'text', required: false },
     {

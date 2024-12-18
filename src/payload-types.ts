@@ -104,6 +104,8 @@ export interface Media {
 export interface Post {
   id: string;
   title?: string | null;
+  subtitle?: string | null;
+  imagePrompt?: string | null;
   threadId?: string | null;
   runId?: string | null;
   slug?: string | null;
@@ -242,6 +244,8 @@ export interface MediaSelect<T extends boolean = true> {
  */
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
+  subtitle?: T;
+  imagePrompt?: T;
   threadId?: T;
   runId?: T;
   slug?: T;

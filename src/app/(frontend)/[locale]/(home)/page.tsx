@@ -10,13 +10,13 @@ export default async function Home() {
   /* const t = useTranslations("Home"); */
 
   const { data: posts } = await getPosts({
-    /* options: {
+    options: {
       where: {
         postStatus: {
           equals: 'published',
         },
       },
-    }, */
+    },
   })
   return (
     <>

@@ -44,10 +44,12 @@ export async function GET() {
         post: {
           id: unwrittenPost.docs[0].id,
           title: postContent.title,
+          subtitle: postContent.subtitle,
+          imagePrompt: postContent.imagePrompt,
           body: postContent.body,
           slug: titleToSlug({ title: postContent.title }),
           categories: 'news',
-          postStatus: 'published',
+          postStatus: 'unpublished',
           publishedAt: new Date(),
         },
       })

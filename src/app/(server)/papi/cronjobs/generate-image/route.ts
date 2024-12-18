@@ -1,6 +1,6 @@
 import getPosts from '@/app/(server)/tasks/getPosts'
 import updatePost from '@/app/(server)/tasks/updatePost'
-import { Post } from '@/payload-types'
+import { Post, Topic } from '@/payload-types'
 import errorResponse from '@/utils/errors/errorResponse'
 import getPayload from '@/utils/getPayload'
 import { NextResponse } from 'next/server'
@@ -8,6 +8,7 @@ import OpenAI from 'openai'
 import fs from 'fs'
 
 import path from 'path'
+import updateTopic from '@/app/(server)/tasks/updateTopic'
 
 export const maxDuration = 300
 
@@ -45,7 +46,7 @@ async function processImageGeneration({ post }: { post: Post }) {
     // Generar la imagen
     const response = await openai.images.generate({
       model: 'dall-e-3',
-      prompt: `Make a nice image, without violence about ${post.title}`,
+      prompt: `Make a nice image about ${post.imagePrompt}`,
       n: 1,
       size: '1024x1024',
     })
@@ -78,9 +79,11 @@ async function processImageGeneration({ post }: { post: Post }) {
     console.log('FUNCIONA 7')
     // Actualizar el post con el estado correcto
     await updatePost({
-      post: { ...post, mediaStatus: 'published', thumbnail: newMedia.id },
+      post: { ...post, postStatus: 'published', mediaStatus: 'published', thumbnail: newMedia.id },
     })
-
+    await updateTopic({
+      topic: { ...(post.topic as Topic), topicStatus: 'published' },
+    })
     console.log('Post updated successfully!')
   } catch (error) {
     console.error('Error generating image:', error)
