@@ -28,7 +28,7 @@ export async function GET() {
 
     const { image } = await generateImage({
       model: openai.image('dall-e-3'),
-      prompt: 'Santa Claus driving a Cadillac',
+      prompt: 'A happy squirrel',
       size: '1024x1024',
     })
 
