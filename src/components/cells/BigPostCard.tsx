@@ -27,7 +27,7 @@ export default function BigPostCard({ post }: { post: Post }) {
       </div>
       <div>
         <Text as="h2" styledAs="h5">
-          {post.title}
+          {post.subtitle}
         </Text>
       </div>
       <div className="flex justify-center items-center gap-2">
