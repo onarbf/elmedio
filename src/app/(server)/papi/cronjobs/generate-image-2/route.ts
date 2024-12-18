@@ -13,6 +13,7 @@ import { openai } from '@ai-sdk/openai'
 
 export async function GET() {
   try {
+    const payload = await getPayload()
     const { data: post } = await getPosts({
       options: {
         where: {
@@ -28,45 +29,13 @@ export async function GET() {
 
     const { image } = await generateImage({
       model: openai.image('dall-e-3'),
-      prompt: 'A happy squirrel',
-      size: '1024x1024',
-    })
-
-    console.log('image', image)
-
-    return NextResponse.json({ message: 'Processing started', post: updatedPost })
-  } catch (error) {
-    const { body, options } = errorResponse(error)
-    return NextResponse.json(body, options)
-  }
-}
-
-async function processImageGeneration({ post }: { post: Post }) {
-  try {
-    const payload = await getPayload()
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY,
-    })
-    console.log('FUNCIONA 3')
-    // Generar la imagen
-    const response = await openai.images.generate({
-      model: 'dall-e-3',
-      prompt: `Make a nice image, without violence about ${post.title}`,
+      prompt: `Make a nice image, without violence about ${updatedPost.title}`,
       n: 1,
       size: '1024x1024',
     })
-    console.log('FUNCIONA 4')
-    const imageUrl = response.data[0].url
+    const imageBuffer = base64ToArrayBuffer(image.base64)
+    console.log('image', image)
 
-    // Descargar la imagen
-    const imageResponse = await fetch(imageUrl!)
-    if (!imageResponse.ok) {
-      throw new Error(`Failed to fetch image: ${imageResponse.statusText}`)
-    }
-
-    const imageBuffer = await imageResponse.arrayBuffer()
-    console.log('FUNCIONA 5')
-    // Configurar la ruta de almacenamiento
     const uploadsDir = path.join(process.cwd(), 'temp/uploads')
     if (!fs.existsSync(uploadsDir)) {
       fs.mkdirSync(uploadsDir, { recursive: true }) // Crear el directorio si no existe
@@ -88,12 +57,20 @@ async function processImageGeneration({ post }: { post: Post }) {
     })
 
     console.log('Post updated successfully!')
-  } catch (error) {
-    console.error('Error generating image:', error)
 
-    // Actualizar el estado del post en caso de error
-    await updatePost({
-      post: { ...post, mediaStatus: 'unstarted' },
-    })
+    return NextResponse.json({ message: 'Processing started', post: updatedPost })
+  } catch (error) {
+    const { body, options } = errorResponse(error)
+    return NextResponse.json(body, options)
   }
+}
+
+function base64ToArrayBuffer(base64: Base64URLString) {
+  const binaryString = atob(base64) // Decodifica el Base64
+  const len = binaryString.length
+  const bytes = new Uint8Array(len) // Crea un Uint8Array
+  for (let i = 0; i < len; i++) {
+    bytes[i] = binaryString.charCodeAt(i) // Asigna cada byte
+  }
+  return bytes.buffer // Devuelve el ArrayBuffer
 }
