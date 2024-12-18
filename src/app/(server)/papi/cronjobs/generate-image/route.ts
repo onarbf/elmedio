@@ -26,10 +26,10 @@ export async function GET() {
 
     setTimeout(async () => {
       try {
-        console.log('FUNCIONA')
+        console.log('FUNCIONA 1')
         await processImageGeneration({ post: post.docs[0] })
 
-        console.log('FUNCIONA2')
+        console.log('FUNCIONA 8')
       } catch (error) {
         console.error('Background task failed:', error)
       }
@@ -46,7 +46,7 @@ async function processImageGeneration({ post }: { post: Post }) {
   try {
     const payload = await getPayload()
     const openai = new OpenAI()
-
+    console.log('FUNCIONA 3')
     // Generar la imagen
     const response = await openai.images.generate({
       model: 'dall-e-3',
@@ -54,7 +54,7 @@ async function processImageGeneration({ post }: { post: Post }) {
       n: 1,
       size: '1024x1024',
     })
-
+    console.log('FUNCIONA 4')
     const imageUrl = response.data[0].url
 
     // Descargar la imagen
@@ -64,7 +64,7 @@ async function processImageGeneration({ post }: { post: Post }) {
     }
 
     const imageBuffer = await imageResponse.arrayBuffer()
-
+    console.log('FUNCIONA 5')
     // Configurar la ruta de almacenamiento
     const uploadsDir = path.join(process.cwd(), 'temp/uploads')
     if (!fs.existsSync(uploadsDir)) {
@@ -73,14 +73,14 @@ async function processImageGeneration({ post }: { post: Post }) {
 
     const filePath = path.join(uploadsDir, `generated-${Date.now()}.png`)
     fs.writeFileSync(filePath, Buffer.from(imageBuffer))
-
+    console.log('FUNCIONA 6')
     // Subir la imagen a la colección `media`
     const newMedia = await payload.create({
       collection: 'media',
       data: {},
       filePath: filePath, // Ruta del archivo guardado
     })
-
+    console.log('FUNCIONA 7')
     // Actualizar el post con el estado correcto
     await updatePost({
       post: { ...post, mediaStatus: 'published', thumbnail: newMedia.id },
