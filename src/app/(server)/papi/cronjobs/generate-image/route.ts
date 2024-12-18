@@ -45,7 +45,9 @@ export async function GET() {
 async function processImageGeneration({ post }: { post: Post }) {
   try {
     const payload = await getPayload()
-    const openai = new OpenAI()
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    })
     console.log('FUNCIONA 3')
     // Generar la imagen
     const response = await openai.images.generate({
@@ -54,6 +56,8 @@ async function processImageGeneration({ post }: { post: Post }) {
       n: 1,
       size: '1024x1024',
     })
+    console.log('Response from OpenAI:', response)
+
     console.log('FUNCIONA 4')
     const imageUrl = response.data[0].url
 
