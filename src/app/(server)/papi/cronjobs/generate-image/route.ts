@@ -9,6 +9,11 @@ import fs from 'fs'
 
 import path from 'path'
 
+export const config = {
+  runtime: 'edge', // Configuración para Edge Function
+}
+export const maxDuration = 80 // This function can run for a maximum of 5 seconds
+
 export async function GET() {
   try {
     const { data: post } = await getPosts({

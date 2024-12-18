@@ -1,15 +1,16 @@
 import getPosts from '@/app/(server)/tasks/getPosts'
 import updatePost from '@/app/(server)/tasks/updatePost'
-import { Post } from '@/payload-types'
-import errorResponse from '@/utils/errors/errorResponse'
-import getPayload from '@/utils/getPayload'
 import { NextResponse } from 'next/server'
 import OpenAI from 'openai'
-import fs from 'fs'
-
-import path from 'path'
 import { experimental_generateImage as generateImage } from 'ai'
 import { openai } from '@ai-sdk/openai'
+import { Readable } from 'stream'
+import errorResponse from '@/utils/errors/errorResponse'
+import getPayload from '@/utils/getPayload'
+
+export const config = {
+  runtime: 'edge', // Configuración para Edge Function
+}
 
 export async function GET() {
   try {
@@ -23,49 +24,54 @@ export async function GET() {
         },
       },
     })
+
     const { data: updatedPost } = await updatePost({
-      post: { ...post.docs[0], mediaStatus: 'unstarted' }, //CHANGE to pending
+      post: { ...post.docs[0], mediaStatus: 'pending' }, // Cambiar estado a pending
     })
 
+    // Generar imagen con OpenAI
     const { image } = await generateImage({
       model: openai.image('dall-e-3'),
       prompt: `Make a nice image, without violence about ${updatedPost.title}`,
       n: 1,
       size: '1024x1024',
     })
+
+    // Convertir el buffer base64 en Uint8Array
     const imageBuffer = base64ToArrayBuffer(image.base64)
-    console.log('image', image)
+    const imageUint8Array = new Uint8Array(imageBuffer)
 
-    const uploadsDir = '/tmp'
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true }) // Crear el directorio si no existe
-    }
+    // Crear un objeto legible desde Uint8Array
+    const imageStream = Readable.from(imageUint8Array)
 
-    const filePath = path.join(uploadsDir, `generated-${Date.now()}.png`)
-    fs.writeFileSync(filePath, Buffer.from(imageBuffer))
-    console.log('FUNCIONA 6')
-    // Subir la imagen a la colección `media`
+    // Subir directamente la imagen generada a la colección `media`
     const newMedia = await payload.create({
       collection: 'media',
       data: {},
-      filePath: filePath, // Ruta del archivo guardado
+      file: {
+        stream: imageStream,
+        filename: `generated-${Date.now()}.png`,
+        mimetype: 'image/png',
+      },
     })
-    console.log('FUNCIONA 7')
+
     // Actualizar el post con el estado correcto
     await updatePost({
-      post: { ...post, mediaStatus: 'published', thumbnail: newMedia.id },
+      post: { ...post.docs[0], mediaStatus: 'published', thumbnail: newMedia.id },
     })
 
     console.log('Post updated successfully!')
 
     return NextResponse.json({ message: 'Processing started', post: updatedPost })
   } catch (error) {
+    console.error('Error:', error)
     const { body, options } = errorResponse(error)
     return NextResponse.json(body, options)
   }
 }
 
-function base64ToArrayBuffer(base64: Base64URLString) {
+// Conversión base64 a ArrayBuffer
+function base64ToArrayBuffer(base64: string) {
   const binaryString = atob(base64) // Decodifica el Base64
   const len = binaryString.length
   const bytes = new Uint8Array(len) // Crea un Uint8Array
