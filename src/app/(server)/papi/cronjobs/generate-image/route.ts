@@ -24,16 +24,7 @@ export async function GET() {
       post: { ...post.docs[0], mediaStatus: 'unstarted' }, //CHANGE to pending
     })
 
-    setTimeout(async () => {
-      try {
-        console.log('FUNCIONA 1')
-        await processImageGeneration({ post: post.docs[0] })
-
-        console.log('FUNCIONA 8')
-      } catch (error) {
-        console.error('Background task failed:', error)
-      }
-    }, 0)
+    await processImageGeneration({ post: post.docs[0] })
 
     return NextResponse.json({ message: 'Processing started', post: updatedPost })
   } catch (error) {
@@ -57,7 +48,6 @@ async function processImageGeneration({ post }: { post: Post }) {
       size: '1024x1024',
     })
     console.log('Response from OpenAI:', response)
-
     console.log('FUNCIONA 4')
     const imageUrl = response.data[0].url
 
