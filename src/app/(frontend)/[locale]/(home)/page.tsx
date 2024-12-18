@@ -4,6 +4,8 @@ import createGenerateMetadata from '@/utils/createGenerateMetadata'
 
 export const generateMetadata = createGenerateMetadata('Home.Metadata') as any
 
+export const revalidate = 0
+
 export default async function Home() {
   /* const t = useTranslations("Home"); */
 
