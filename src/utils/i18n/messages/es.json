@@ -1,10 +1,10 @@
 {
   "Home": {
     "Metadata": {
-      "title": "Home",
-      "description": "Descripción de la home"
+      "title": "El Artificial ",
+      "description": "Un periodico de noticias escritas por IA"
     },
-    "title": "Hola Mundo!"
+    "title": ""
   },
   "About": {
     "Metadata": {
