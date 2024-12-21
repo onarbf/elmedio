@@ -39,6 +39,7 @@ export default async function LocaleLayout({
           style={{ display: 'none', visibility: 'hidden' }}
         ></iframe>
       </noscript> */}
+      <GoogleTagManager gtmId="GTM-WWSPHB4C" />
       <body>
         <NextIntlClientProvider messages={messages}>
           <Navbar />
@@ -46,7 +47,6 @@ export default async function LocaleLayout({
           <Footer />
         </NextIntlClientProvider>
       </body>
-      <GoogleTagManager gtmId="GTM-WWSPHB4C" />
     </html>
   )
 }
