@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+
+import tailwindcssBgPatterns from 'tailwindcss-bg-patterns'
+
 export default {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   safelist: [
@@ -134,7 +137,7 @@ export default {
     },
   },
   plugins: [
-    require('tailwindcss-bg-patterns'),
+    tailwindcssBgPatterns,
     function (api) {
       const { addBase } = api
       addBase({
