@@ -5,16 +5,24 @@
       "schedule": "0,30 * * * *"
     },
     {
-      "path": "/papi/cronjobs/create-thread-with-assistant-and-prompt",
+      "path": "/papi/cronjobs/create-thread-with-assistant-and-prompt?type=news",
       "schedule": "2,32 * * * *"
     },
     {
-      "path": "/papi/cronjobs/check-run-and-publish",
+      "path": "/papi/cronjobs/check-run-and-publish?type=news",
       "schedule": "5,35 * * * *"
     },
     {
       "path": "/papi/cronjobs/generate-image",
       "schedule": "6,36 * * * *"
+    },
+    {
+      "path": "/papi/cronjobs/create-thread-with-assistant-and-prompt?type=shitpost",
+      "schedule": "* * * * *"
+    },
+    {
+      "path": "/papi/cronjobs/check-run-and-publish?type=shitpost",
+      "schedule": "* * * * *"
     }
   ]
 }

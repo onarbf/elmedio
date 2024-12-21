@@ -11,11 +11,9 @@ export default async function getPosts({
   options?: Omit<FindOptions<'posts', SelectIncludeType>, 'collection'>
 } = {}) {
   try {
-    console.log('workssss')
     const payloadServer = await payload({ config })
-    console.log('works2')
+
     const posts = await payloadServer.find({ collection: 'posts', ...options })
-    console.log('posts', posts)
     return buildResponse({ data: posts })
   } catch (error) {
     throw serverError(error)

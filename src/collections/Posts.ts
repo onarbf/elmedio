@@ -17,6 +17,22 @@ export const Posts: CollectionConfig = {
       required: false,
     },
     {
+      name: 'type',
+      type: 'select',
+      options: [
+        {
+          label: 'News',
+          value: 'news',
+        },
+        {
+          label: 'Shitpost',
+          value: 'shitpost',
+        },
+      ],
+      defaultValue: 'news',
+      required: true,
+    },
+    {
       name: 'imagePrompt',
       type: 'text',
       required: false,
@@ -126,7 +142,7 @@ export const Posts: CollectionConfig = {
       required: true,
       defaultValue: 'unstarted',
       options: [
-        { label: 'unused', value: 'Unused' },
+        { label: 'Unused', value: 'unused' },
         {
           label: 'Unstarted',
           value: 'unstarted',

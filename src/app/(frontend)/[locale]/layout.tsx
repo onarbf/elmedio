@@ -33,7 +33,7 @@ export default async function LocaleLayout({
       <body>
         <NextIntlClientProvider messages={messages}>
           <Navbar />
-          {children}
+          <div className="mt-16">{children}</div>
           <Footer />
         </NextIntlClientProvider>
       </body>

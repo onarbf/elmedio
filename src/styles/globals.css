@@ -49,5 +49,17 @@
   font-size: 2rem;
 }
 
+.news-body h4 {
+  font-family: 'Times New Roman', 'Georgia', 'Cambria', 'Times New Roman', 'serif';
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-top: 24px;
+}
+
+.news-body hr {
+  border: 1px solid var(--main-300);
+  margin: 24px 0;
+}
+
 .news-body p {
 }

@@ -6,16 +6,21 @@ import updateTopic from '@/app/(server)/tasks/updateTopic'
 import { Topic } from '@/payload-types'
 import errorResponse from '@/utils/errors/errorResponse'
 import titleToSlug from '@/utils/titleToSlug'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
+    const { searchParams } = new URL(req.url)
+    let type = searchParams.get('type') || 'news'
     const { data: unwrittenPost } = await getPosts({
       options: {
         where: {
           threadId: {
             exists: true,
             not_equals: null,
+          },
+          type: {
+            equals: type,
           },
           postStatus: {
             equals: 'unwritten',
@@ -49,13 +54,16 @@ export async function GET() {
           body: postContent.body,
           slug: titleToSlug({ title: postContent.title }),
           categories: 'news',
-          postStatus: 'unpublished',
+          postStatus: type === 'news' ? 'unpublished' : 'published',
           publishedAt: new Date(),
         },
       })
 
       const { data: updatedTopic } = await updateTopic({
-        topic: { ...(newPost.topic as Topic), topicStatus: 'published' },
+        topic: {
+          ...(newPost.topic as Topic),
+          topicStatus: type === 'news' ? 'unpublished' : 'published',
+        },
       })
 
       return NextResponse.json(updatedTopic)

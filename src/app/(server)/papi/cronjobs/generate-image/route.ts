@@ -20,6 +20,9 @@ export async function GET() {
           mediaStatus: {
             equals: 'unstarted',
           },
+          type: {
+            equals: 'news',
+          },
         },
       },
     })

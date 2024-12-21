@@ -7,9 +7,9 @@ export default function Footer() {
   const date = new Date().getFullYear()
 
   return (
-    <footer className="">
+    <footer className="border-t-[1px] border-main-700 bg-main-100 mt-4">
       <Wrapper>
-        <div className="grid grid-cols-2 md:px-2  mt-2">
+        <div className="grid grid-cols-2 md:px-2  py-4 mt-2">
           <div className="">ElMedio | {date}</div>
           <div className="">
             <ul className="flex gap-2 justify-end ">

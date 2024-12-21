@@ -1,3 +1,4 @@
+import Pattern from '@/components/atoms/Pattern'
 import Separator from '@/components/atoms/Separator'
 import Tag from '@/components/atoms/Tag'
 import Text from '@/components/atoms/Text'
@@ -9,13 +10,16 @@ import { Bookmark, Clock } from 'lucide-react'
 import markdownit from 'markdown-it'
 export default function PageClient({ post }: { post: Post }) {
   const md = markdownit()
+
   const formattedBody = md.render(post.body || '')
-  const thumbnail = post.thumbnail as Media
   const publishedDate = dateFormatter({ date: post.publishedAt })
-  console.log('thumbnail.url', process.env.PRODUCTION_URL! + thumbnail.url!)
+  const thumbnailUrl =
+    typeof post.thumbnail === 'object' && post.thumbnail !== null
+      ? process.env.PRODUCTION_URL! + post.thumbnail.url
+      : 'https://placehold.co/600x400'
   return (
     <Wrapper as="main">
-      <section className="mt-8">
+      <section className="mt-8 ">
         {/* TAG */}
         {/* <div className="flex ">
           <Tag styledAs="elegant" className="bg-main-900 text-main-100">
@@ -23,7 +27,7 @@ export default function PageClient({ post }: { post: Post }) {
           </Tag>
         </div> */}
         {/* TITLE */}
-        <div className="mt-4">
+        <div className="mt-[120px]">
           <Text as="h1" className="">
             {post.title}
           </Text>
@@ -36,14 +40,11 @@ export default function PageClient({ post }: { post: Post }) {
         </div>
         {/* IMAGE */}
         <div className="mt-8">
-          <img
-            src={
-              thumbnail.url
-                ? process.env.PRODUCTION_URL! + thumbnail.url!
-                : 'https://placehold.co/1200x400'
-            }
-            className="aspect-video w-full h-full object-cover"
-          />
+          {post.mediaStatus === 'unused' ? (
+            <Pattern />
+          ) : (
+            <img src={thumbnailUrl} className="aspect-video w-full h-full object-cover" />
+          )}
         </div>
       </section>
       <section className="grid grid-cols-12 gap-4 mt-4">

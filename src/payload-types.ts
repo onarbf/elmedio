@@ -105,6 +105,7 @@ export interface Post {
   id: string;
   title?: string | null;
   subtitle?: string | null;
+  type: 'news' | 'shitpost';
   imagePrompt?: string | null;
   threadId?: string | null;
   runId?: string | null;
@@ -124,7 +125,7 @@ export interface Post {
   createdAt: string;
   publishedAt?: string | null;
   postStatus: 'unwritten' | 'unpublished' | 'published';
-  mediaStatus: 'Unused' | 'unstarted' | 'pending' | 'published';
+  mediaStatus: 'unused' | 'unstarted' | 'pending' | 'published';
   updatedAt: string;
 }
 /**
@@ -135,8 +136,9 @@ export interface Topic {
   id: string;
   title: string;
   source: string;
-  posts: (string | Post)[];
+  posts?: (string | Post)[] | null;
   topicStatus: 'unwritten' | 'unpublished' | 'published';
+  type: 'news' | 'shitpost';
   publishAt?: string | null;
   createdAt: string;
   updatedAt: string;
@@ -246,6 +248,7 @@ export interface MediaSelect<T extends boolean = true> {
 export interface PostsSelect<T extends boolean = true> {
   title?: T;
   subtitle?: T;
+  type?: T;
   imagePrompt?: T;
   threadId?: T;
   runId?: T;
@@ -277,6 +280,7 @@ export interface TopicsSelect<T extends boolean = true> {
   source?: T;
   posts?: T;
   topicStatus?: T;
+  type?: T;
   publishAt?: T;
   createdAt?: T;
   updatedAt?: T;

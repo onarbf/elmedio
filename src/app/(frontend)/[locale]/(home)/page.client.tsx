@@ -3,6 +3,7 @@ import BigPostCard from '@/components/cells/BigPostCard'
 
 import PostCard from '@/components/cells/cards/PostCard'
 import Wrapper from '@/components/cells/Wrapper'
+import _ from '@/constants'
 import { Post } from '@/payload-types'
 import { PaginatedDocs } from 'payload'
 
@@ -10,10 +11,10 @@ export default function PageClient({ posts }: { posts: PaginatedDocs<Post> }) {
   const mainPost = posts.docs[0]
   const secondaryPosts = posts.docs.filter((post, index) => index !== 0)
   return (
-    <Wrapper as="main" className="mt-2 aspect-video">
+    <Wrapper as="main" className="mt-2">
       <section className="flex justify-center ">
         <Text as="h1" className="text-[5rem] font-serif">
-          El<b>Medio</b>
+          {_.metadata.title}
         </Text>
       </section>
       {/* Categories bar */}
@@ -29,7 +30,7 @@ export default function PageClient({ posts }: { posts: PaginatedDocs<Post> }) {
       {/* HEADER */}
       <BigPostCard post={mainPost} />
       {/* MAIN NEWS */}
-      <section className="grid grid-cols-3 gap-x-8 gap-y-12 mt-8">
+      <section className="grid md:grid-cols-1 grid-cols-3 gap-x-8 gap-y-12 mt-8">
         {/* NEW CARD */}
         {secondaryPosts.map((post, index) => {
           return <PostCard key={index} post={post} />

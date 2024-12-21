@@ -1,12 +1,12 @@
-import styles from "@/constants/styles";
+import styles from '@/constants/styles'
 
-const websiteUrl = "localhost:3000";
-const defaultLocale = "en";
+const websiteUrl = 'localhost:3000'
+const defaultLocale = 'es'
 
 const _ = {
   metadata: {
-    title: "New website",
-    description: "New website Description",
+    title: 'ElArtificial',
+    description: 'Un periódico objetivo y sin censura',
     alternates: {
       canonical: `${websiteUrl}/${defaultLocale}`,
       languages: {
@@ -17,7 +17,7 @@ const _ = {
   websiteUrl,
   styles,
   defaultLocale,
-  locales: ["en", "es"] as const,
-} as const;
+  locales: ['en', 'es'] as const,
+} as const
 
-export default _;
+export default _

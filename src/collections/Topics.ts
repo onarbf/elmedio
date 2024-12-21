@@ -20,7 +20,6 @@ export const Topics: CollectionConfig = {
       name: 'posts',
       type: 'relationship',
       relationTo: 'posts',
-      required: true,
       hasMany: true,
     },
     {
@@ -41,6 +40,22 @@ export const Topics: CollectionConfig = {
         },
       ],
       defaultValue: 'unwritten',
+      required: true,
+    },
+    {
+      name: 'type',
+      type: 'select',
+      options: [
+        {
+          label: 'News',
+          value: 'news',
+        },
+        {
+          label: 'Shitpost',
+          value: 'shitpost',
+        },
+      ],
+      defaultValue: 'news',
       required: true,
     },
     {

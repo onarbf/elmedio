@@ -3,6 +3,7 @@ import CommentsCounter from '@/components/cells/CommentsCounter'
 import { Post } from '@/payload-types'
 import A from '@/components/atoms/A'
 import dateFormatter from '@/utils/dateFormatter/dateFormatter'
+import Pattern from '@/components/atoms/Pattern'
 export default function PostCard({ post }: { post: Post }) {
   const thumbnailUrl =
     typeof post.thumbnail === 'object' && post.thumbnail !== null
@@ -15,7 +16,11 @@ export default function PostCard({ post }: { post: Post }) {
       {/* Image */}
       <div className="aspect-video">
         <A href={`/news/${post.slug}`}>
-          <img src={thumbnailUrl!} className="w-full h-full object-cover " />
+          {post.mediaStatus === 'unused' ? (
+            <Pattern />
+          ) : (
+            <img src={thumbnailUrl!} className="w-full h-full object-cover " />
+          )}
         </A>
       </div>
       {/* Metadata */}
@@ -29,7 +34,7 @@ export default function PostCard({ post }: { post: Post }) {
       </div>
       {/* Title */}
       <div className="">
-        <A href={`/news/${post.slug}`}>
+        <A href={`/news/${post.slug}`} styledAs="clean">
           <Text as="h2" styledAs="h3">
             {post.title}
           </Text>
