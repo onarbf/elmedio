@@ -6,7 +6,7 @@ import dateFormatter from '@/utils/dateFormatter/dateFormatter'
 export default function PostCard({ post }: { post: Post }) {
   const thumbnailUrl =
     typeof post.thumbnail === 'object' && post.thumbnail !== null
-      ? post.thumbnail.url
+      ? process.env.PRODUCTION_URL! + post.thumbnail.url
       : 'https://placehold.co/600x400'
 
   const publishedDate = dateFormatter({ date: post.publishedAt! })

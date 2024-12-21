@@ -17,6 +17,13 @@ export const Topics: CollectionConfig = {
       required: true,
     },
     {
+      name: 'posts',
+      type: 'relationship',
+      relationTo: 'posts',
+      required: true,
+      hasMany: true,
+    },
+    {
       name: 'topicStatus',
       type: 'select',
       options: [

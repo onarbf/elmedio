@@ -12,7 +12,11 @@ export default function BigPostCard({ post }: { post: Post }) {
       <div className="">
         <A href={`/news/${post.slug}`}>
           <img
-            src={thumbnail.url ? thumbnail.url : 'https://placehold.co/1200x400'}
+            src={
+              thumbnail.url
+                ? process.env.PRODUCTION_URL! + thumbnail.url
+                : 'https://placehold.co/1200x400'
+            }
             className="w-full h-full object-cover aspect-video"
           />
         </A>

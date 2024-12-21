@@ -8,7 +8,7 @@ export default async function About() {
   return (
     <Wrapper as="main" className="mt-2">
       <div>
-        <Text as="h2">About</Text>
+        <Text as="h1">About</Text>
       </div>
     </Wrapper>
   )

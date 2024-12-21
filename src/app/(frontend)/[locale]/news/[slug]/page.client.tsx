@@ -12,15 +12,16 @@ export default function PageClient({ post }: { post: Post }) {
   const formattedBody = md.render(post.body || '')
   const thumbnail = post.thumbnail as Media
   const publishedDate = dateFormatter({ date: post.publishedAt })
+  console.log('thumbnail.url', process.env.PRODUCTION_URL! + thumbnail.url!)
   return (
     <Wrapper as="main">
       <section className="mt-8">
         {/* TAG */}
-        <div className="flex ">
+        {/* <div className="flex ">
           <Tag styledAs="elegant" className="bg-main-900 text-main-100">
             Exclusiva/Primera parte
           </Tag>
-        </div>
+        </div> */}
         {/* TITLE */}
         <div className="mt-4">
           <Text as="h1" className="">
@@ -36,14 +37,18 @@ export default function PageClient({ post }: { post: Post }) {
         {/* IMAGE */}
         <div className="mt-8">
           <img
-            src={thumbnail.url ? thumbnail.url! : 'https://placehold.co/1200x400'}
+            src={
+              thumbnail.url
+                ? process.env.PRODUCTION_URL! + thumbnail.url!
+                : 'https://placehold.co/1200x400'
+            }
             className="aspect-video w-full h-full object-cover"
           />
         </div>
       </section>
       <section className="grid grid-cols-12 gap-4 mt-4">
         {/* METADATA */}
-        <div className="col-span-8  ">
+        <div className="col-span-8 md:col-span-12  ">
           <div className=" flex ">
             <div className="flex gap-4">
               {/* <div className="flex flex-col">
@@ -92,7 +97,7 @@ export default function PageClient({ post }: { post: Post }) {
           <div className="news-body" dangerouslySetInnerHTML={{ __html: formattedBody }}></div>
         </div>
 
-        <div className="col-span-4">
+        <div className="md:col-span-12 col-span-4">
           <div className="flex items-center gap-2">
             <Text as="h4" styledAs="superSmall" className="font-bold">
               Noticias Relacionadas

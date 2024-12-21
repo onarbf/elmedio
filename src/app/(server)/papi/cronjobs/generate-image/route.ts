@@ -81,8 +81,13 @@ async function processImageGeneration({ post }: { post: Post }) {
     await updatePost({
       post: { ...post, postStatus: 'published', mediaStatus: 'published', thumbnail: newMedia.id },
     })
+    const topic = post.topic as Topic
+    const postsTopic = topic.posts as Post[]
+    const postsTopicId = postsTopic.map((post) => {
+      return post.id
+    })
     await updateTopic({
-      topic: { ...(post.topic as Topic), topicStatus: 'published' },
+      topic: { ...topic, posts: [...postsTopicId, post.id], topicStatus: 'published' },
     })
     console.log('Post updated successfully!')
   } catch (error) {

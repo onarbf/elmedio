@@ -135,6 +135,7 @@ export interface Topic {
   id: string;
   title: string;
   source: string;
+  posts: (string | Post)[];
   topicStatus: 'unwritten' | 'unpublished' | 'published';
   publishAt?: string | null;
   createdAt: string;
@@ -274,6 +275,7 @@ export interface PostsSelect<T extends boolean = true> {
 export interface TopicsSelect<T extends boolean = true> {
   title?: T;
   source?: T;
+  posts?: T;
   topicStatus?: T;
   publishAt?: T;
   createdAt?: T;

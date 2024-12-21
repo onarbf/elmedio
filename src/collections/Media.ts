@@ -10,5 +10,7 @@ export const Media: CollectionConfig = {
       required: false,
     },
   ],
+  // @ts-ignore
+  disableLocalStorage: true,
   upload: true,
 }

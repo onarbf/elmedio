@@ -17,13 +17,13 @@ export default function PageClient({ posts }: { posts: PaginatedDocs<Post> }) {
         </Text>
       </section>
       {/* Categories bar */}
-      <section>
+      {/* <section>
         <ul className="flex gap-2 justify-between">
           {Array.from({ length: 8 }).map((_, index) => {
             return <li key={index}>Categoría {index + 1}</li>
           })}
         </ul>
-      </section>
+      </section> */}
       {/* LAST HOUR BAR */}
 
       {/* HEADER */}
