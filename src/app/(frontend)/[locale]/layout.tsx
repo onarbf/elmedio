@@ -31,15 +31,14 @@ export default async function LocaleLayout({
       lang={locale}
       className="font-sans antialiased bg-main-100 dark:bg-main-900 dark:text-main-100"
     >
-      <GoogleTagManager gtmId="GTM-WWSPHB4C" />
-      <noscript>
+      {/*       <noscript>
         <iframe
           src="https://www.googletagmanager.com/ns.html?id=GTM-WWSPHB4C"
           height="0"
           width="0"
           style={{ display: 'none', visibility: 'hidden' }}
         ></iframe>
-      </noscript>
+      </noscript> */}
       <body>
         <NextIntlClientProvider messages={messages}>
           <Navbar />
@@ -47,6 +46,7 @@ export default async function LocaleLayout({
           <Footer />
         </NextIntlClientProvider>
       </body>
+      <GoogleTagManager gtmId="GTM-WWSPHB4C" />
     </html>
   )
 }
