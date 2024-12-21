@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const x = {
+export default {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   safelist: [
     // Patrones
@@ -152,5 +152,3 @@ const x = {
     },
   ],
 }
-
-export default x
