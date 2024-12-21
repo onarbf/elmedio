@@ -5,7 +5,7 @@ import _ from '@/constants'
 
 export default function Navbar() {
   return (
-    <div className="fixed top-0 w-full border-b-[1px]  border-main-700 bg-main-100">
+    <div className="fixed z-[1001] top-0 w-full border-b-[1px]  border-main-700 bg-main-100">
       <Wrapper>
         <nav className="flex items-center py-4 justify-between">
           <div className="">
