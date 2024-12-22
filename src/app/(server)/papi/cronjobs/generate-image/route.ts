@@ -26,8 +26,9 @@ export async function GET() {
         },
       },
     })
+
     const { data: updatedPost } = await updatePost({
-      post: { ...post.docs[0], mediaStatus: 'unstarted' }, //CHANGE to pending
+      post: { ...post.docs[0], mediaStatus: 'pending' },
     })
 
     await processImageGeneration({ post: post.docs[0] })
@@ -45,7 +46,6 @@ async function processImageGeneration({ post }: { post: Post }) {
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     })
-    console.log('FUNCIONA 3', post.imagePrompt)
     // Generar la imagen
     const response = await openai.images.generate({
       model: 'dall-e-3',
@@ -53,7 +53,6 @@ async function processImageGeneration({ post }: { post: Post }) {
       n: 1,
       size: '1024x1024',
     })
-    console.log('FUNCIONA 4')
     const imageUrl = response.data[0].url
 
     // Descargar la imagen
@@ -77,20 +76,22 @@ async function processImageGeneration({ post }: { post: Post }) {
     const newMedia = await payload.create({
       collection: 'media',
       data: {},
-      filePath: filePath, // Ruta del archivo guardado
+      filePath: filePath,
     })
     console.log('FUNCIONA 7')
     // Actualizar el post con el estado correcto
-    await updatePost({
+    const { data: updatedPost } = await updatePost({
       post: { ...post, postStatus: 'published', mediaStatus: 'published', thumbnail: newMedia.id },
     })
+
+    console.log(updatedPost)
     const topic = post.topic as Topic
+    console.log('topic ', topic)
     const postsTopic = topic.posts as Post[]
-    const postsTopicId = postsTopic.map((post) => {
-      return post.id
-    })
+    console.log('postsTopic', postsTopic)
+    const updatedPostsTopics = postsTopic ? [...postsTopic, updatedPost] : [updatedPost]
     await updateTopic({
-      topic: { ...topic, posts: [...postsTopicId, post.id], topicStatus: 'published' },
+      topic: { ...topic, posts: updatedPostsTopics, topicStatus: 'published' },
     })
     console.log('Post updated successfully!')
   } catch (error) {

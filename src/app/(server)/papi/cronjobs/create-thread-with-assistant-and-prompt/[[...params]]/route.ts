@@ -11,6 +11,7 @@ export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url)
     let type = searchParams.get('type') || 'news'
+    console.log(type)
     const { data: author } = await getUsers()
     const { data: unwrittenTopic } = await getTopics({
       options: {
