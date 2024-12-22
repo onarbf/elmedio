@@ -55,7 +55,7 @@ export const Topics: CollectionConfig = {
           value: 'shitpost',
         },
       ],
-      defaultValue: 'news',
+      defaultValue: 'shitpost',
       required: true,
     },
     {
