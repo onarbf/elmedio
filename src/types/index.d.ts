@@ -35,11 +35,11 @@ export interface ServerResponse<T = unknown> {
 }
 
 export type ServerError = {
-  name: 'UnknownError'
-  message: 'Error de desconocido'
-  details: any
-  status: 500
-  error: any
+  name?: 'UnknownError'
+  message?: 'Error de desconocido'
+  details?: any
+  status?: 500
+  error?: any
 }
 
 export type FlexiblePost = Pick<Post> & {
@@ -61,4 +61,12 @@ export type FlexibleTopic = Pick<Topic, 'title' | 'source' | 'topicStatus'> & {
   publishAt?: string
   createdAt?: string
   updatedAt?: string
+}
+
+export interface BingNewsArticle {
+  name: string
+  url: string
+  description: string
+  datePublished: string
+  provider: { name: string }[]
 }

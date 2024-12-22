@@ -46,10 +46,12 @@ async function processImageGeneration({ post }: { post: Post }) {
     const openai = new OpenAI({
       apiKey: process.env.OPENAI_API_KEY,
     })
+
+    console.log('post.imagePrompt', post.imagePrompt)
     // Generar la imagen
     const response = await openai.images.generate({
       model: 'dall-e-2',
-      prompt: `Make a nice image about ${post.imagePrompt}. Please, be careful with content policy and respect it. Don't do anything racist, sexual or violent.`,
+      prompt: `Make a nice image about ${post.imagePrompt}. Please, be careful with content policy and respect it.`,
       n: 1,
       size: '1024x1024',
     })
@@ -62,7 +64,6 @@ async function processImageGeneration({ post }: { post: Post }) {
     }
 
     const imageBuffer = await imageResponse.arrayBuffer()
-    console.log('FUNCIONA 5')
     // Configurar la ruta de almacenamiento
     const uploadsDir = '/tmp'
     if (!fs.existsSync(uploadsDir)) {
@@ -71,24 +72,20 @@ async function processImageGeneration({ post }: { post: Post }) {
 
     const filePath = path.join(uploadsDir, `generated-${Date.now()}.png`)
     fs.writeFileSync(filePath, Buffer.from(imageBuffer))
-    console.log('FUNCIONA 6')
+
     // Subir la imagen a la colección `media`
     const newMedia = await payload.create({
       collection: 'media',
       data: {},
       filePath: filePath,
     })
-    console.log('FUNCIONA 7')
     // Actualizar el post con el estado correcto
     const { data: updatedPost } = await updatePost({
       post: { ...post, postStatus: 'published', mediaStatus: 'published', thumbnail: newMedia.id },
     })
 
-    console.log(updatedPost)
     const topic = post.topic as Topic
-    console.log('topic ', topic)
     const postsTopic = topic.posts as Post[]
-    console.log('postsTopic', postsTopic)
     const updatedPostsTopics = postsTopic ? [...postsTopic, updatedPost] : [updatedPost]
     await updateTopic({
       topic: { ...topic, posts: updatedPostsTopics, topicStatus: 'published' },
@@ -96,10 +93,11 @@ async function processImageGeneration({ post }: { post: Post }) {
     console.log('Post updated successfully!')
   } catch (error) {
     console.error('Error generating image:', error)
-
-    // Actualizar el estado del post en caso de error
     await updatePost({
-      post: { ...post, mediaStatus: 'unstarted' },
+      post: { ...post, mediaStatus: 'unused', postStatus: 'published' },
+    })
+    await updateTopic({
+      topic: { ...(post.topic as Topic), posts: [post], topicStatus: 'published' },
     })
   }
 }

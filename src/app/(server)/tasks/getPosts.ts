@@ -11,6 +11,7 @@ export default async function getPosts({
   options?: Omit<FindOptions<'posts', SelectIncludeType>, 'collection'>
 } = {}) {
   try {
+    console.log('PUNCH')
     const payloadServer = await payload({ config })
 
     const posts = await payloadServer.find({ collection: 'posts', ...options })

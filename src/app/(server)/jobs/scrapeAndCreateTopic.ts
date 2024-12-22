@@ -26,6 +26,7 @@ export default async function scrapeAndCreateTopic() {
           title: titles![i],
           source: 'efe.com',
           topicStatus: 'unwritten',
+          type: 'news',
         } as Topic)
         return response
       }

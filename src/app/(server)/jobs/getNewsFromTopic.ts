@@ -1,12 +1,8 @@
-interface NewsArticle {
-  name: string
-  url: string
-  description: string
-  datePublished: string
-  provider: { name: string }[]
-}
+import { BingNewsArticle } from '@/types'
+import { buildResponse } from '@/utils/buildResponse'
+import { serverError } from '@/utils/errors/serverError'
 
-async function getNewsFromTopic(topic: string): Promise<NewsArticle[]> {
+async function getNewsFromTopic(topic: string) {
   try {
     const response = await fetch(
       `${process.env.BING_NEWS_ENDPOINT}?q=${encodeURIComponent(topic)}&cc=es-ES&count=5&freshness=Day`,
@@ -21,7 +17,7 @@ async function getNewsFromTopic(topic: string): Promise<NewsArticle[]> {
 
     const data = await response.json()
 
-    const articles: NewsArticle[] = data.value.map((article: any) => ({
+    const articles: BingNewsArticle[] = data.value.map((article: any) => ({
       name: article.name,
       url: article.url,
       description: article.description,
@@ -29,10 +25,9 @@ async function getNewsFromTopic(topic: string): Promise<NewsArticle[]> {
       provider: article.provider,
     }))
 
-    return articles
+    return buildResponse({ data: articles })
   } catch (error) {
-    console.error('Error fetching news:', error)
-    throw new Error('Failed to fetch news')
+    throw serverError(error)
   }
 }
 

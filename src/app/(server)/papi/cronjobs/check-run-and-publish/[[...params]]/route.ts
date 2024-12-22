@@ -26,16 +26,18 @@ export async function GET(req: NextRequest) {
           postStatus: {
             equals: 'unwritten',
           },
-          depth: {
-            equals: 2,
-          },
         },
       },
     })
+    console.log(
+      'unwrittenPostunwrittenPostunwrittenPostunwrittenPostunwrittenPostunwrittenPostunwrittenPost',
+      unwrittenPost,
+    )
     const { data: newRun } = await checkRun({
       threadId: unwrittenPost.docs[0].threadId!,
       runId: unwrittenPost.docs[0].runId!,
     })
+    console.log('newRunnewRunnewRunnewRunnewRunnewRunnewRun', newRun)
     const { data: messagesOnThread } = await getMessagesOnThread({ threadId: newRun.thread_id })
 
     // Validar si el contenido tiene la estructura esperada
