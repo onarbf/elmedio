@@ -49,7 +49,9 @@ export async function GET(req: NextRequest) {
         ``,
       )
       prompt = `Te voy a pasar una serie de noticias, y en función de la información que hay en ellas. Todas ellas están relacionadas con ${unwrittenTopic.docs[0].title}.
-    Utilíza esta información para escribir tú una noticia al respecto. Intenta ser fidedigno, no te inventes cosas que no sabes y si es neceisario, utiliza información del pasado. Esta noticia es muy importante, escríbela para rankear bien en google pero sin caer en el amarillismo. Sé profesional:
+    Utilíza esta información para escribir tú una noticia al respecto. Intenta ser fidedigno, no te inventes cosas que no sabes y si es neceisario, utiliza información del pasado. Esta noticia es muy importante, escríbela para rankear bien en google pero sin caer en el amarillismo
+    
+    No añadas HTML, sino Markdown, ya que irá directamente a la base de datos:
     \n Noticias sobre el tema \n
     ${bodies}`
     }
