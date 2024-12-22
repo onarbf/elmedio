@@ -11,7 +11,7 @@ export const generateMetadata = createGenerateMetadata({
 
 export default async function Post({ params }: any) {
   const { slug } = await params
-  const { data: post } = await getPosts({
+  const { data: posts } = await getPosts({
     options: {
       where: {
         slug: {
@@ -20,10 +20,22 @@ export default async function Post({ params }: any) {
       },
     },
   })
-
+  const { data: relatedPosts } = await getPosts({
+    options: {
+      where: {
+        slug: {
+          not_equals: slug,
+        },
+        type: {
+          equals: posts.docs[0].type,
+        },
+      },
+      limit: 3,
+    },
+  })
   return (
     <>
-      <PageClient post={post.docs[0]} />
+      <PageClient post={posts.docs[0]} relatedPosts={relatedPosts.docs} />
     </>
   )
 }

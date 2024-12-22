@@ -16,6 +16,7 @@ export default async function Home() {
           equals: 'published',
         },
       },
+      limit: 40,
     },
   })
   return (

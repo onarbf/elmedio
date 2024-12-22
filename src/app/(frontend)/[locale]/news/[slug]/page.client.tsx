@@ -2,13 +2,14 @@ import Pattern from '@/components/atoms/Pattern'
 import Separator from '@/components/atoms/Separator'
 import Tag from '@/components/atoms/Tag'
 import Text from '@/components/atoms/Text'
+import PostCard from '@/components/cells/cards/PostCard'
 import CommentsCounter from '@/components/cells/CommentsCounter'
 import Wrapper from '@/components/cells/Wrapper'
 import { Media, Post } from '@/payload-types'
 import dateFormatter from '@/utils/dateFormatter/dateFormatter'
 import { Bookmark, Clock } from 'lucide-react'
 import markdownit from 'markdown-it'
-export default function PageClient({ post }: { post: Post }) {
+export default function PageClient({ post, relatedPosts }: { post: Post; relatedPosts: Post[] }) {
   const md = markdownit()
 
   const formattedBody = md.render(post.body || '')
@@ -99,11 +100,15 @@ export default function PageClient({ post }: { post: Post }) {
         </div>
 
         <div className="md:col-span-12 col-span-4">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-center gap-2">
             <Text as="h4" styledAs="superSmall" className="font-bold">
               Noticias Relacionadas
             </Text>
-            <Separator />
+            <div className="">
+              {relatedPosts.map((post: Post) => (
+                <PostCard key={post.id} post={post} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
