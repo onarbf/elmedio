@@ -26,11 +26,12 @@ export async function GET(req: NextRequest) {
           postStatus: {
             equals: 'unwritten',
           },
+          depth: {
+            equals: 2,
+          },
         },
       },
     })
-
-    console.log('unwrittenPost', unwrittenPost)
     const { data: newRun } = await checkRun({
       threadId: unwrittenPost.docs[0].threadId!,
       runId: unwrittenPost.docs[0].runId!,
