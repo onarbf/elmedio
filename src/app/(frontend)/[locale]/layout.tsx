@@ -7,10 +7,14 @@ import { notFound } from 'next/navigation'
 import { routing } from '@/utils/i18n/routing'
 import { ReactElement } from 'react'
 import { GoogleTagManager } from '@next/third-parties/google'
+import createGenerateMetadata from '@/utils/createGenerateMetadata'
 
 export function generateStaticParams() {
   return [{ locale: 'es' }]
 }
+
+export const generateMetadata = createGenerateMetadata({ namespace: 'Default.Metadata' })
+
 export default async function LocaleLayout({
   children,
   params,
@@ -31,14 +35,7 @@ export default async function LocaleLayout({
       lang={locale}
       className="font-sans antialiased bg-main-100 dark:bg-main-900 dark:text-main-100"
     >
-      {/*       <noscript>
-        <iframe
-          src="https://www.googletagmanager.com/ns.html?id=GTM-WWSPHB4C"
-          height="0"
-          width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
-        ></iframe>
-      </noscript> */}
+      <link rel="icon" href="/img/favicon-dark.ico" sizes="any" />
       <GoogleTagManager gtmId="GTM-WWSPHB4C" />
       <body>
         <NextIntlClientProvider messages={messages}>

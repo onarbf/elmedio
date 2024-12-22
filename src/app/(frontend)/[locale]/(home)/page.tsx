@@ -2,7 +2,7 @@ import PageClient from '@/app/(frontend)/[locale]/(home)/page.client'
 import getPosts from '@/app/(server)/tasks/getPosts'
 import createGenerateMetadata from '@/utils/createGenerateMetadata'
 
-export const generateMetadata = createGenerateMetadata('Home.Metadata') as any
+export const generateMetadata = createGenerateMetadata({ namespace: 'Home.Metadata' }) as any
 
 export const revalidate = 0
 

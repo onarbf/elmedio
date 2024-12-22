@@ -1,10 +1,15 @@
 {
-  "Home": {
+  "Default": {
     "Metadata": {
       "title": "El Artificial ",
-      "description": "Un periodico de noticias escritas por IA"
-    },
-    "title": ""
+      "description": "Un periodico enfocado en la objetividad, la libertad de prensa, y la veracidad de la información"
+    }
+  },
+  "Home": {
+    "Metadata": {
+      "title": "El Artificial | El lugar de la verdad",
+      "description": "Un periodico enfocado en la objetividad, la libertad de prensa, y la veracidad de la información"
+    }
   },
   "About": {
     "Metadata": {

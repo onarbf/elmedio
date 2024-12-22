@@ -15,15 +15,6 @@ export default function Navbar() {
               </Text>
             </A>
           </div>
-          <div>
-            <ul className="flex justify-end gap-2">
-              <li>
-                <A href="/about" styledAs="clean">
-                  <Text>About</Text>
-                </A>
-              </li>
-            </ul>
-          </div>
         </nav>
       </Wrapper>
     </div>
