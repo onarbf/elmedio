@@ -12,6 +12,7 @@ export default function createGenerateMetadata({
   return async function generateMetadata({ params }: { params: { locale: string; slug: string } }) {
     const { locale, slug } = await params
     let title = undefined
+    let description = undefined
     if (slug) {
       if (dynamic.type === 'post') {
         const { data: posts } = await getPosts({
@@ -24,6 +25,7 @@ export default function createGenerateMetadata({
           },
         })
         title = `${_.metadata.title} | ${posts.docs[0].title}`
+        description = ` ${posts.docs[0].subtitle}`
       }
     }
 
@@ -31,7 +33,7 @@ export default function createGenerateMetadata({
 
     return {
       title: title || t('title')?.trim() || _.metadata.title,
-      description: t('description')?.trim() || _.metadata.description,
+      description: description || t('description')?.trim() || _.metadata.description,
       alternates: _.metadata.alternates,
       keywords: t('keywords') || _.metadata.keywords || 'default, keywords',
       robots: 'index, follow',
