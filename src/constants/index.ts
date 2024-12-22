@@ -17,7 +17,7 @@ const _ = {
   websiteUrl,
   styles,
   defaultLocale,
-  locales: ['en', 'es'] as const,
+  locales: ['es'] as const,
 } as const
 
 export default _

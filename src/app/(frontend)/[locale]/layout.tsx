@@ -9,7 +9,7 @@ import { ReactElement } from 'react'
 import { GoogleTagManager } from '@next/third-parties/google'
 
 export function generateStaticParams() {
-  return [{ locale: 'en' }, { locale: 'de' }, { locale: 'es' }]
+  return [{ locale: 'es' }]
 }
 export default async function LocaleLayout({
   children,
