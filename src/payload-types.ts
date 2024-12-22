@@ -135,7 +135,7 @@ export interface Post {
 export interface Topic {
   id: string;
   title: string;
-  source: string;
+  source?: string | null;
   posts?: (string | Post)[] | null;
   topicStatus: 'unwritten' | 'unpublished' | 'published';
   type: 'news' | 'shitpost';

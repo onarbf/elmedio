@@ -14,7 +14,7 @@ export const Topics: CollectionConfig = {
     {
       name: 'source',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       name: 'posts',
