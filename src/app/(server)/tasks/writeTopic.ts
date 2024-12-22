@@ -7,7 +7,6 @@ import { FlexibleTopic } from '@/types'
 
 export async function writeTopic(topic: FlexibleTopic) {
   try {
-    console.log('topic', topic)
     return buildResponse({ data: topic })
   } catch (error: any) {
     return serverError(error)

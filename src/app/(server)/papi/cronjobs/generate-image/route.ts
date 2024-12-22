@@ -47,7 +47,6 @@ async function processImageGeneration({ post }: { post: Post }) {
       apiKey: process.env.OPENAI_API_KEY,
     })
 
-    console.log('post.imagePrompt', post.imagePrompt)
     // Generar la imagen
     const response = await openai.images.generate({
       model: 'dall-e-2',
@@ -90,7 +89,6 @@ async function processImageGeneration({ post }: { post: Post }) {
     await updateTopic({
       topic: { ...topic, posts: updatedPostsTopics, topicStatus: 'published' },
     })
-    console.log('Post updated successfully!')
   } catch (error) {
     console.error('Error generating image:', error)
     await updatePost({

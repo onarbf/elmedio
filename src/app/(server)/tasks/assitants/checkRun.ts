@@ -15,7 +15,6 @@ export default async function checkRun({
     const openai = new OpenAI()
 
     const run = await openai.beta.threads.runs.retrieve(threadId, runId)
-    console.log(run)
 
     return buildResponse({ data: run })
   } catch (error) {

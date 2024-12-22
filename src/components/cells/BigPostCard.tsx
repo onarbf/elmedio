@@ -11,7 +11,6 @@ export default function BigPostCard({ post }: { post: Post }) {
       ? process.env.PRODUCTION_URL! + post.thumbnail.url
       : 'https://placehold.co/600x400'
 
-  console.log('post.publishedAt', post.publishedAt)
   const publishedDate = dateFormatter({ date: post.publishedAt })
   return (
     <section className="mt-8">

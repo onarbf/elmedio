@@ -8,7 +8,6 @@ export default async function createThread(): Promise<ServerResponse<any>> {
 
     const emptyThread = await openai.beta.threads.create()
 
-    console.log(emptyThread)
     return buildResponse({ data: emptyThread })
   } catch (error) {
     throw serverError(error)

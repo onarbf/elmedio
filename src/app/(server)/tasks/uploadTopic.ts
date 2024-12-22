@@ -5,7 +5,6 @@ import getPayload from '@/utils/getPayload'
 import { Topic } from '@/payload-types'
 
 export async function uploadTopic(topic: Topic) {
-  console.log('w')
   try {
     const payload = await getPayload()
 

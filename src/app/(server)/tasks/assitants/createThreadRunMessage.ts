@@ -17,8 +17,6 @@ export default async function createThreadRunMessage({
       },
     })
 
-    console.log(run)
-
     return buildResponse({ data: run })
   } catch (error) {
     throw serverError(error)

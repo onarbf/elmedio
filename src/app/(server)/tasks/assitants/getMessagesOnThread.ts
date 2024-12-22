@@ -14,8 +14,6 @@ export default async function getMessagesOnThread({
 
     const messages = await openai.beta.threads.messages.list(threadId)
 
-    console.log(messages)
-
     return buildResponse({ data: messages })
   } catch (error) {
     throw serverError(error)

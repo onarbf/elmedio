@@ -27,7 +27,6 @@ export default async function scrapeNews({
     const article = reader.parse()
 
     if (article) {
-      console.log('wtf', article)
       return buildResponse({
         status: 200,
         data: { title: article.title, content: article.content, url },

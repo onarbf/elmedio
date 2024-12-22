@@ -11,7 +11,6 @@ export default async function updateTopic({
   topic: Topic
 }): Promise<ServerResponse<Topic>> {
   try {
-    console.log('updateTopic')
     const payload = await getPayload({ config })
     const { id, ...data } = topic
 

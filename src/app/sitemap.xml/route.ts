@@ -36,7 +36,6 @@ export async function GET() {
         )
         .join('')}
     </urlset>`
-    console.log(sitemap)
     // Return the sitemap response
     return new Response(sitemap, {
       headers: {

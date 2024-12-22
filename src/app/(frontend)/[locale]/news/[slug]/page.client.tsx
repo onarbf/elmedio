@@ -100,11 +100,11 @@ export default function PageClient({ post, relatedPosts }: { post: Post; related
         </div>
 
         <div className="md:col-span-12 col-span-4">
-          <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col items-center gap-4">
             <Text as="h4" styledAs="superSmall" className="font-bold">
               Noticias Relacionadas
             </Text>
-            <div className="">
+            <div className="flex flex-col gap-8">
               {relatedPosts.map((post: Post) => (
                 <PostCard key={post.id} post={post} />
               ))}

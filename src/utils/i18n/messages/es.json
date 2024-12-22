@@ -2,20 +2,51 @@
   "Default": {
     "Metadata": {
       "title": "El Artificial ",
-      "description": "Un periodico enfocado en la objetividad, la libertad de prensa, y la veracidad de la información"
+      "description": "Un periodico enfocado en la objetividad, la libertad de prensa, y la veracidad de la información",
+      "keywords": "periodico, noticias, objetividad, libertad de prensa, veracidad, información, actualidad",
+      "openGraph": {
+        "title": "El Artificial | El lugar de la verdad",
+        "description": "Un periodico enfocado en la objetividad, la libertad de prensa, y la veracidad de la información",
+        "type": "website",
+        "url": "https://elartificial.com",
+        "image": "https://elartificial.com/img/graphImg.png",
+        "imageAlt": "El Artificial",
+        "site_name": "El Artificial",
+        "locale": "es_ES"
+      },
+      "twitter": {
+        "card": "summary_large_image",
+        "site": "@elartificial",
+        "creator": "@elartificial",
+        "title": "El Artificial | El lugar de la verdad",
+        "description": "Un periodico enfocado en la objetividad, la libertad de prensa, y la veracidad de la información",
+        "image": "https://elartificial.com/img/graphImg.png"
+      }
     }
   },
   "Home": {
     "Metadata": {
-      "title": "El Artificial | El lugar de la verdad",
-      "description": "Un periodico enfocado en la objetividad, la libertad de prensa, y la veracidad de la información"
+      "title": "El Artificial ",
+      "description": "Un periodico enfocado en la objetividad, la libertad de prensa, y la veracidad de la información",
+      "keywords": "periodico, noticias, objetividad, libertad de prensa, veracidad, información, actualidad",
+      "openGraph": {
+        "title": "El Artificial | El lugar de la verdad",
+        "description": "Un periodico enfocado en la objetividad, la libertad de prensa, y la veracidad de la información",
+        "type": "website",
+        "url": "https://elartificial.com",
+        "image": "https://elartificial.com/img/graphImg.png",
+        "imageAlt": "El Artificial",
+        "site_name": "El Artificial",
+        "locale": "es_ES"
+      },
+      "twitter": {
+        "card": "summary_large_image",
+        "site": "@elartificial",
+        "creator": "@elartificial",
+        "title": "El Artificial | El lugar de la verdad",
+        "description": "Un periodico enfocado en la objetividad, la libertad de prensa, y la veracidad de la información",
+        "image": "https://elartificial.com/img/graphImg.png"
+      }
     }
-  },
-  "About": {
-    "Metadata": {
-      "title": "Página about",
-      "description": "Descripción about"
-    },
-    "title": "Hola about!!"
   }
 }

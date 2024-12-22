@@ -20,8 +20,6 @@ export default async function createMessageOnThread({
       content: prompt,
     })
 
-    console.log(messages)
-
     return buildResponse({ data: messages })
   } catch (error) {
     throw serverError(error)

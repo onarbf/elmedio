@@ -33,14 +33,12 @@ export async function GET(req: NextRequest) {
     let prompt = unwrittenTopic.docs[0].title
     let sources: { source: string; id: number }[] = []
     if (type === 'news') {
-      console.log('1 preparing news')
       for (const article of articles) {
         const articleBody = await scrapeNews({ article })
         if (articleBody.status === 200) {
           scrappedArticles.push(articleBody.data)
         }
       }
-      console.log('2 scrapped work')
       sources = scrappedArticles.map((article, id) => ({ source: article.url || '', id }))
       const bodies = scrappedArticles.reduce(
         (acc: string, article: { title?: string; content?: string; url?: string }, index) => {

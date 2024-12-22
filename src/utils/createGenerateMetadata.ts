@@ -62,13 +62,7 @@ export default function createGenerateMetadata({
       icons: {
         icon: '/img/favicon.ico',
         shortcut: '/img/favicon.ico',
-        apple: '/img/apple-touch-icon.png',
       },
-      themeColor: [
-        { media: '(prefers-color-scheme: dark)', color: '#000000' },
-        { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-      ],
-      viewport: 'width=device-width, initial-scale=1.0',
     }
   }
 }

@@ -14,7 +14,6 @@ function scrapeEfe(html: string): string[] {
 
 export async function scrapeTopics() {
   try {
-    console.log('running')
     const res = await fetch('https://efe.com/espana/')
 
     if (!res.ok) {
