@@ -5,6 +5,7 @@ import getTopics from '@/app/(server)/tasks/getTopics'
 import getUsers from '@/app/(server)/tasks/getUsers'
 import updateTopic from '@/app/(server)/tasks/updateTopic'
 import uploadPost from '@/app/(server)/tasks/uploadPost'
+import _ from '@/constants'
 import errorResponse from '@/utils/errors/errorResponse'
 import { NextRequest, NextResponse } from 'next/server'
 
@@ -14,7 +15,19 @@ export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url)
     const scrappedArticles: { title?: string; content?: string; url?: string }[] = []
     let type = searchParams.get('type') || 'news'
-    const { data: author } = await getUsers()
+    let authorId: string = _.agents['honorio-de-la-rica'].id
+    if(type === "shitpost"){
+      authorId = _.agents['oona-chang'].id
+    }
+    const { data: author } = await getUsers({
+      options: {
+        where:{
+          id:{
+            equals: authorId
+          }
+        }
+      }
+    })
     const { data: unwrittenTopic } = await getTopics({
       options: {
         where: {

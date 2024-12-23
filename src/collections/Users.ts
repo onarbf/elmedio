@@ -19,7 +19,7 @@ export const Users: CollectionConfig = {
     {
       name: 'profile',
       type: 'upload',
-      relationTo: 'media', // Assuming you have a Media collection
+      relationTo: 'media', 
       required:false
     },
   ],

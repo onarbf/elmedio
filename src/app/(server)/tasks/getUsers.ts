@@ -1,6 +1,4 @@
-import { User } from '@/payload-types'
 import { buildResponse } from '@/utils/buildResponse'
-import errorResponse from '@/utils/errors/errorResponse'
 import { serverError } from '@/utils/errors/serverError'
 import getPayload from '@/utils/getPayload'
 
