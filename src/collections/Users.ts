@@ -12,7 +12,7 @@ export const Users: CollectionConfig = {
   fields: [
     // Email added by default
     {
-      name: 'title',
+      name: 'bio',
       type: 'text',
       required: false,
     },
