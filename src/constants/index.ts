@@ -1,5 +1,4 @@
 import styles from '@/constants/styles'
-import { url } from 'inspector'
 
 const websiteUrl = 'localhost:3000'
 const defaultLocale = 'es'
@@ -24,6 +23,13 @@ const _ = {
   styles,
   defaultLocale,
   locales: ['es'] as const,
+  agents: {
+    "oona-chang": {
+    openai_id: "asst_OIpZrslvUxZRWjlRqzc46gdi"
+  },
+  "honorio-de-la-rica":{
+    openai_id: "asst_Wkb1YyCP4cB1VtEhbL32ALMv"
+  }}
 } as const
 
 export default _

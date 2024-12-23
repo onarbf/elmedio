@@ -54,7 +54,7 @@ export async function GET(req: NextRequest) {
     ${bodies}`
     }
 
-    const { data: newRun } = await createThreadRunMessage({ prompt })
+    const { data: newRun } = await createThreadRunMessage({ prompt,type })
     await uploadPost({
       post: {
         author: author.docs[0].id,
