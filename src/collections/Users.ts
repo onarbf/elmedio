@@ -11,6 +11,16 @@ export const Users: CollectionConfig = {
   },
   fields: [
     // Email added by default
-    // Add more fields as needed
+    {
+      name: 'title',
+      type: 'text',
+      required: false,
+    },
+    {
+      name: 'profile',
+      type: 'upload',
+      relationTo: 'media', // Assuming you have a Media collection
+      required:false
+    },
   ],
 }
