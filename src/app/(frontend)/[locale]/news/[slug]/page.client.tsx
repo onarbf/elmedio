@@ -94,7 +94,7 @@ export default function PageClient({ post, relatedPosts }: { post: Post; related
           <div>
             {author.name !== 'Press' && (
               <div className="flex gap-4 border border-main-900 p-4 md:w-full w-[80%]">
-                <div className="w-[240px] bg-red-300">
+                <div className="w-[240px] ">
                   {author.profile && (
                     <img
                       src={`${process.env.PRODUCTION_URL}${author.profile.url}`}
