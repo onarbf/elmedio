@@ -5,9 +5,9 @@ export const Users: CollectionConfig = {
   admin: {
     useAsTitle: 'email',
   },
-  
+
   auth: {
-    maxLoginAttempts: 50
+    maxLoginAttempts: 50,
   },
   fields: [
     // Email added by default
@@ -19,8 +19,10 @@ export const Users: CollectionConfig = {
     {
       name: 'profile',
       type: 'upload',
-      relationTo: 'media', 
-      required:false
+      relationTo: 'media',
+      required: false,
     },
+
+    { name: 'name', type: 'text', required: true },
   ],
 }

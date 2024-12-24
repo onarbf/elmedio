@@ -9,15 +9,25 @@ import { Media, Post } from '@/payload-types'
 import dateFormatter from '@/utils/dateFormatter/dateFormatter'
 import { Bookmark, Clock } from 'lucide-react'
 import markdownit from 'markdown-it'
+import { Author } from 'next/dist/lib/metadata/types/metadata-types'
+import { User } from 'payload'
 export default function PageClient({ post, relatedPosts }: { post: Post; relatedPosts: Post[] }) {
+  const author = post.author as unknown as User
   const md = markdownit()
-
   const formattedBody = md.render(post.body || '')
   const publishedDate = dateFormatter({ date: post.publishedAt })
   const thumbnailUrl =
     typeof post.thumbnail === 'object' && post.thumbnail !== null
       ? process.env.PRODUCTION_URL! + post.thumbnail.url
       : 'https://placehold.co/600x400'
+
+  let gender = 'man'
+  let expertise = 'Actualidad'
+  if (post.type === 'shitpost') {
+    gender = 'woman'
+    expertise = 'Cultura de Internet'
+  }
+
   return (
     <Wrapper as="main">
       <section className="mt-8 ">
@@ -48,33 +58,16 @@ export default function PageClient({ post, relatedPosts }: { post: Post; related
           )}
         </div>
       </section>
-      <section className="grid grid-cols-12 gap-4 mt-4">
+      <section className="grid grid-cols-12 gap-4 mt-4 mt-8">
         {/* METADATA */}
-        <div className="col-span-8 md:col-span-12  ">
+        <div className="col-span-8 md:col-span-12  flex flex-col gap-4">
           <div className=" flex ">
             <div className="flex gap-4">
-              {/* <div className="flex flex-col">
-                <Text as="h4" styledAs="h6" className="font-bold">
-                  Ketty Garat
-                </Text>
-                <Text as="small" styledAs="superSmall">
-                  @KettyGarat
-                </Text>
-                <Text as="small" styledAs="superSmall">
-                  kg@theobjective.com
+              <div className="flex flex-col ">
+                <Text as="h4" styledAs="h6" className="italic font-thin">
+                  Escrito por {author.name}
                 </Text>
               </div>
-              <div className="flex flex-col">
-                <Text as="h4" styledAs="h6" className="font-bold">
-                  Ketty Garat
-                </Text>
-                <Text as="small" styledAs="superSmall">
-                  @KettyGarat
-                </Text>
-                <Text as="small" styledAs="superSmall">
-                  kg@theobjective.com
-                </Text>
-              </div> */}
             </div>
             <div className="grow flex items-end justify-end">
               <div className="flex items-center gap-1">
@@ -97,9 +90,37 @@ export default function PageClient({ post, relatedPosts }: { post: Post; related
             </div>
           </div> */}
           <div className="news-body" dangerouslySetInnerHTML={{ __html: formattedBody }}></div>
+          <Separator />
+          <div>
+            {author.name !== 'Press' && (
+              <div className="flex gap-4 border border-main-900 p-4 md:w-full w-[80%]">
+                <div className="w-[240px] bg-red-300">
+                  {author.profile && (
+                    <img
+                      src={`${process.env.PRODUCTION_URL}${author.profile.url}`}
+                      className="rounded-full w-full aspect-square"
+                    />
+                  )}
+                </div>
+                <div className="">
+                  <Text as="h5" styledAs="h5" className="font-serif">
+                    {author.name}
+                  </Text>
+                  <Text className="italic">{author.bio}</Text>
+                  <div className="mt-2">
+                    <Separator />
+                    <Text as="small" className="italic">
+                      {author.name} es nuestr{gender === 'man' ? 'o' : 'a'} expert
+                      {gender === 'man' ? 'o' : 'a'} en {expertise}
+                    </Text>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
 
-        <div className="md:col-span-12 col-span-4">
+        <div className="md:col-span-12 col-span-4 ">
           <div className="flex flex-col items-center gap-4">
             <Text as="h4" styledAs="superSmall" className="font-bold">
               Noticias Relacionadas

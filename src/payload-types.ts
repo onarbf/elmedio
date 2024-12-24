@@ -69,6 +69,7 @@ export interface User {
   id: string;
   bio?: string | null;
   profile?: (string | null) | Media;
+  name: string;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -217,6 +218,7 @@ export interface PayloadMigration {
 export interface UsersSelect<T extends boolean = true> {
   bio?: T;
   profile?: T;
+  name?: T;
   updatedAt?: T;
   createdAt?: T;
   email?: T;
