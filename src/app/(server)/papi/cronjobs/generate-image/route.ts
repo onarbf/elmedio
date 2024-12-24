@@ -70,15 +70,26 @@ async function processImageGeneration({ post }: { post: Post }) {
     }
 
     const filePath = path.join(uploadsDir, `generated-${Date.now()}.png`)
-    fs.writeFileSync(filePath, Buffer.from(imageBuffer))
+    fs.writeFileSync(filePath, Buffer.from(imageBuffer)) // Escribir el archivo correctamente
 
+    const fileBuffer = fs.readFileSync(filePath) // Leer el archivo como Buffer
     // Subir la imagen a la colección `media`
     const newMedia = await payload.create({
       collection: 'media',
       data: {},
-      filePath: filePath,
+      file: {
+        data: fileBuffer,
+        name: `generated-${Date.now()}.png`,
+        size: fileBuffer.length,
+        mimetype: 'image/png',
+      },
     })
-    // Actualizar el post con el estado correcto
+
+    await payload.findByID({
+      collection: 'media',
+      id: newMedia.id,
+    })
+
     const { data: updatedPost } = await updatePost({
       post: { ...post, postStatus: 'published', mediaStatus: 'published', thumbnail: newMedia.id },
     })
@@ -89,6 +100,11 @@ async function processImageGeneration({ post }: { post: Post }) {
     await updateTopic({
       topic: { ...topic, posts: updatedPostsTopics, topicStatus: 'published' },
     })
+    await payload.update({
+      collection: 'media',
+      id: newMedia.id,
+      data: {},
+    })
   } catch (error) {
     console.error('Error generating image:', error)
     await updatePost({
@@ -98,4 +114,13 @@ async function processImageGeneration({ post }: { post: Post }) {
       topic: { ...(post.topic as Topic), posts: [post], topicStatus: 'published' },
     })
   }
+}
+
+function streamToBuffer(stream: fs.ReadStream): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const chunks: Buffer[] = []
+    stream.on('data', (chunk) => chunks.push(chunk as Buffer))
+    stream.on('end', () => resolve(Buffer.concat(chunks)))
+    stream.on('error', reject)
+  })
 }
