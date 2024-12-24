@@ -35,7 +35,8 @@ export default async function LocaleLayout({
       lang={locale}
       className="font-sans antialiased bg-main-100 dark:bg-main-900 dark:text-main-100"
     >
-      <link rel="icon" href="/img/favicon-dark.ico" sizes="any" />
+      <link rel="icon" href="/img/favicon.ico" sizes="any" />
+      <link rel="icon" href="/img/favicon.ico" sizes="any" />
       <GoogleTagManager gtmId="GTM-WWSPHB4C" />
       <body>
         <NextIntlClientProvider messages={messages}>
